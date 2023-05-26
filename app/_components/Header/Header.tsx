@@ -24,17 +24,17 @@ export default function Header() {
                 d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
               />
             </svg>
-            都都逸ライフ
+            都々逸ライフ
           </div>
         </Link>
       </div>
       <div
         id="navbar-default"
-        className="items-stretch flex justify-between flex-grow flex-shrink-0 h-13"
+        className="hidden md:flex items-stretch justify-between flex-grow flex-shrink-0 h-13"
       >
         <div id="navbar-default-start" className="flex">
           <Link href="/">
-            <div className="hover:bg-primary-dark h-full text-sm flex items-center font-noto p-1 text-white">
+            <div className="hover:bg-primary-dark h-full text-sm flex items-center font-noto p-1 pr-2 text-white">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -53,7 +53,7 @@ export default function Header() {
             </div>
           </Link>
           <Link href="/">
-            <div className="hover:bg-primary-dark h-full text-sm flex items-center font-noto p-2 text-white">
+            <div className="hover:bg-primary-dark h-full text-sm flex items-center font-noto p-1 pr-2 text-white">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -74,7 +74,7 @@ export default function Header() {
         </div>
         <div id="navbar-default-end" className="flex">
           <Link href="/login">
-            <div className="hover:bg-primary-dark h-full text-sm flex items-center font-noto p-2 text-white">
+            <div className="hover:bg-primary-dark h-full text-sm flex items-center font-noto p-1  pr-2 text-white">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -92,6 +92,29 @@ export default function Header() {
               ログイン
             </div>
           </Link>
+        </div>
+      </div>
+      <div
+        id="navbar-default"
+        className="flex md:hidden items-stretch justify-end flex-grow flex-shrink-0 h-13"
+      >
+        <div id="navbar-default-end">
+          <div className="hover:bg-primary-dark h-full text-sm flex items-center font-noto p-1 text-white">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+          </div>
         </div>
       </div>
     </nav>
