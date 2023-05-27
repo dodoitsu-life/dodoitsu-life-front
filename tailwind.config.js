@@ -13,9 +13,31 @@ module.exports = {
         tertiary: "#AEE2FF",
         quaternary: "#E6FFFD",
         "primary-light": "#B799FF",
+        "primary-dark": "#9434E9",
       },
       fontFamily: {
-        noto: ['"Noto Serif JP"', "serif"], // 'noto' is the name of this utility
+        "noto-serif": ["Noto Serif JP", "serif"],
+      },
+
+      keyframes: {
+        "xScroll-lg": {
+          "0%": { transform: "translateX(0)" },
+          // 都々逸のカードが800px * 5枚と、余白を含めた数値
+          "100%": { transform: "translateX(-4095px)" },
+        },
+        xScroll: {
+          "0%": { transform: "translateX(0)" },
+          // 都々逸のカードが600px * 5枚と、余白を含めた数値
+          "100%": { transform: "translateX(-3100px)" },
+        },
+      },
+      animation: {
+        "xScroll-lg": "xScroll-lg 60s linear infinite",
+        xScroll: "xScroll 60s linear infinite",
+      },
+      transitionDelay: {
+        "0s": "0s",
+        "60s": "60s",
       },
     },
   },
