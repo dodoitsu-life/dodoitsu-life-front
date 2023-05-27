@@ -8,11 +8,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#B799FF",
+        primary: "#A377FF",
         secondary: "#ACBCFF",
         tertiary: "#AEE2FF",
         quaternary: "#E6FFFD",
-        "primary-dark": "#A377FF",
+        "primary-light": "#B799FF",
       },
       fontFamily: {
         noto: ['"Noto Serif JP"', "serif"], // 'noto' is the name of this utility
