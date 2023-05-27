@@ -11,7 +11,7 @@ import { TrophyIcon, StarIcon } from "@heroicons/react/24/outline";
 import { Card } from "@components/Card";
 import { LinkButton } from "@components/LinkButton/LinkButton";
 
-export default () => {
+const Home = () => {
   const yesterdaysPopularDodoitsu = useAtomValue(yesterdaysPopularDodoitsuAtom);
   const yesterdaysPostsDodoitsu = useAtomValue(yesterdaysPostsDodoitsuAtom);
 
@@ -124,3 +124,5 @@ export default () => {
     </main>
   );
 };
+
+export default Home;
