@@ -2,7 +2,8 @@
 
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Header from "@/app/_components/Header/Header";
+import { Header } from "@/app/_components/Header/Header";
+import { Footer } from "@/app/_components/Footer/Footer";
 import JotaiProvider from "@/app/_components/Providers/JotaiProvider/JotaiProvider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,6 +21,7 @@ export default function RootLayout({
           <div id="main-container">
             <section>{children}</section>
           </div>
+          <Footer />
         </JotaiProvider>
       </body>
     </html>
