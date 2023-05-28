@@ -1,5 +1,3 @@
-"use client";
-
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
@@ -11,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "都々逸ライフ",
-  description: "都々逸の投稿サイト",
+  description: "都々逸の共有サイトです",
 };
 
 export default function RootLayout({
@@ -21,11 +19,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="jp">
-      <body className={inter.className}>
+      <body className={`${inter.className} flex flex-col h-screen`}>
         <JotaiProvider>
           <Header />
-          <div id="main-container">
-            <section>{children}</section>
+          <div id="main-container" className="flex-grow">
+            {children}
           </div>
           <Footer />
         </JotaiProvider>
