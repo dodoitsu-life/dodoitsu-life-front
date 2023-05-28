@@ -2,13 +2,14 @@
 
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { Metadata } from "next";
 import { Header } from "@/app/_components/Header/Header";
 import { Footer } from "@/app/_components/Footer/Footer";
 import JotaiProvider from "@/app/_components/Providers/JotaiProvider/JotaiProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "都々逸ライフ",
   description: "都々逸の投稿サイト",
 };
