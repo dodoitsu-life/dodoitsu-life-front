@@ -8,6 +8,11 @@ import JotaiProvider from "@/app/_components/Providers/JotaiProvider/JotaiProvid
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const metadata = {
+  title: "都々逸ライフ",
+  description: "都々逸の投稿サイト",
+};
+
 export default function RootLayout({
   children,
 }: {
