@@ -1,20 +1,12 @@
 "use client";
 
-import { useAtomValue } from "jotai";
-import {
-  yesterdaysPopularDodoitsuAtom,
-  yesterdaysPostsDodoitsuAtom,
-} from "@atoms/dodoitsu";
-
-import { TrophyIcon, StarIcon } from "@heroicons/react/24/outline";
-
 import { Card } from "@components/Card";
 import { LinkButton } from "@components/LinkButton/LinkButton";
 
-const Home = () => {
-  const yesterdaysPopularDodoitsu = useAtomValue(yesterdaysPopularDodoitsuAtom);
-  const yesterdaysPostsDodoitsu = useAtomValue(yesterdaysPostsDodoitsuAtom);
+import { PopularDodoitsuList } from "./_components/PopularDodoitsuList";
+import { NewDodoitsuList } from "./_components/NewDodoitsuList";
 
+const Home = () => {
   return (
     <main className="container mx-auto px-4 flex justify-center">
       <div className="w-full max-w-7xl mt-12">
@@ -38,7 +30,7 @@ const Home = () => {
                 都々逸の世界へ、一緒に飛び込みましょう
               </p>
               <div className="flex justify-center">
-                <LinkButton text="投稿してみる" href="/" />
+                <LinkButton text="投稿してみる" href="/dodoitsu/create" />
               </div>
             </div>
           </Card>
@@ -49,33 +41,7 @@ const Home = () => {
           <h2 className="mb-8 text-center lg:text-3xl text-lg font-bold text-gray-900 dark:text-white">
             昨日、最もいいねを集めた都々逸
           </h2>
-          {yesterdaysPopularDodoitsu.map((dodoitsu, index) => {
-            const isFirst = index === 0;
-            const marginButtom = isFirst ? "mb-5" : "mb-3  w-11/12";
-            const Icon = isFirst ? (
-              <TrophyIcon className="w-8 h-6 lg:w-11 lg:h-8 text-yellow-600" />
-            ) : (
-              <StarIcon className="w-7 h-4 text-yellow-900" />
-            );
-            const textSize = isFirst
-              ? "text-xl lg:text-3xl"
-              : "text-lg lg:text-2xl";
-
-            return (
-              <div key={index} className={marginButtom}>
-                <Card>
-                  <div className="m-5 flex">
-                    {Icon}
-                    <div
-                      className={`${textSize} font-bold font-noto-serif text-gray-900 dark:text-white`}
-                    >
-                      {dodoitsu.content}
-                    </div>
-                  </div>
-                </Card>
-              </div>
-            );
-          })}
+          <PopularDodoitsuList />
         </section>
 
         <section id="yaesterday-posts" className="my-24">
@@ -83,38 +49,7 @@ const Home = () => {
             昨日投稿された都々逸
           </h2>
 
-          <div id="infinite-animation" className="w-full overflow-hidden">
-            <div className="flex">
-              {["0", "60"].map((delay) => {
-                return (
-                  <div
-                    key={delay}
-                    className={`flex animate-xScroll lg:animate-xScroll-lg delay-${delay}s`}
-                  >
-                    <div className="w-full flex">
-                      {[0, 1, 2, 3, 4].map((index) => {
-                        return (
-                          <div
-                            key={index}
-                            className="mr-5 min-w-[600px] lg:min-w-[800px]"
-                          >
-                            <Card key={index}>
-                              <div className="m-5">
-                                <div className="text-md lg:text-xl font-bold font-noto-serif text-gray-900 dark:text-white">
-                                  {yesterdaysPostsDodoitsu[index] &&
-                                    yesterdaysPostsDodoitsu[index].content}
-                                </div>
-                              </div>
-                            </Card>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          <NewDodoitsuList />
 
           <div className="mt-7 text-center">
             <LinkButton text="最新の投稿を見る" href="/" />
