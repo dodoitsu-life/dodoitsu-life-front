@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { Card } from "@components/Card";
 import { CreateForm, CreateFormTypes } from "./_components/CreateForm";
