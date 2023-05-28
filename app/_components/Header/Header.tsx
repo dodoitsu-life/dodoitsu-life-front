@@ -39,7 +39,7 @@ export const Header = () => {
           className="items-stretch flex flex-shrink-0 h-14 lg:h-16"
         >
           <Link href="/">
-            <div className="hover:bg-primary lg:text-3xl text-lg h-full flex items-center gap-1 font-noto-serif p-1 text-white">
+            <div className="hover:bg-primary lg:text-3xl text-lg h-full flex items-center gap-1 font-noto-serif p-1 pr-2 text-white">
               <BookOpenIcon className="w-7 h-5 lg:w-11 lg:h-9" />
               都々逸ライフ
             </div>
@@ -55,7 +55,7 @@ export const Header = () => {
               return (
                 <Link key={index} href={item.link}>
                   <div className="hover:bg-primary h-full text-xl flex items-center font-noto-serif p-1 pr-2 text-white">
-                    <Icon className="w-9 h-7" />
+                    <Icon className="w-9 h-6" />
                     {item.name}
                   </div>
                 </Link>
@@ -65,7 +65,7 @@ export const Header = () => {
           <div id="navbar-default-end" className="flex">
             <Link href="/login">
               <div className="hover:bg-primary h-full text-xl flex items-center font-noto-serif p-1 pr-2 text-white">
-                <ArrowRightOnRectangleIcon className="w-9 h-7" />
+                <ArrowRightOnRectangleIcon className="w-9 h-6" />
                 ログイン
               </div>
             </Link>
