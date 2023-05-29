@@ -80,9 +80,9 @@ const DodoitsuCreatePreview = () => {
                   )}
 
                   <div className="flex items-center justify-end border-t border-gray-300 pt-5">
-                    <TwitterShareButton />
+                    <TwitterShareButton className="w-5 h-5 lg:w-8 lg:h-8" />
                     <button className="ml-3 bg-red-300 hover:bg-red-400 text-white font-bold p-2 rounded-full">
-                      <HeartIcon className="h-8 w-8" />
+                      <HeartIcon className="w-5 h-5 lg:w-8 lg:h-8" />
                     </button>
                   </div>
                 </div>

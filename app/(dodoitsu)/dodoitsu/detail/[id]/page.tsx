@@ -39,7 +39,10 @@ const DodoitsuDetail = () => {
               )}
 
               <div className="flex items-center justify-end border-t border-gray-300 pt-5">
-                <TwitterShareButton href={twitterShareLink} />
+                <TwitterShareButton
+                  href={twitterShareLink}
+                  className="w-5 h-5 lg:w-8 lg:h-8"
+                />
                 {/* <button className="ml-3 bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-2 rounded-full">
                   <HeartIcon className="h-8 w-8" />
                 </button> */}
