@@ -1,31 +1,40 @@
 "use client";
 import { Menu } from "./types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
 import {
   BookOpenIcon,
   ClipboardIcon,
   TrophyIcon,
-  ArrowRightOnRectangleIcon,
+  // ArrowRightOnRectangleIcon,
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
 export const Header = () => {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const menu = [
     {
       name: "最新の投稿",
       icon: ClipboardIcon,
-      link: "/",
+      link: "/dodoitsu?mode=latest",
     },
     {
       name: "ランキング",
       icon: TrophyIcon,
-      link: "/",
+      link: "/dodoitsu?mode=ranking",
     },
   ] satisfies Menu[];
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    const closeMobileMenu = () => setMobileMenuOpen(false);
+    closeMobileMenu();
+  }, [pathname, searchParams]);
 
   return (
     <header>
@@ -62,14 +71,14 @@ export const Header = () => {
               );
             })}
           </div>
-          <div id="navbar-default-end" className="flex">
+          {/* <div id="navbar-default-end" className="flex">
             <Link href="/login">
               <div className="hover:bg-primary h-full text-xl flex items-center font-noto-serif p-1 pr-2 text-white">
                 <ArrowRightOnRectangleIcon className="w-9 h-6" />
                 ログイン
               </div>
             </Link>
-          </div>
+          </div> */}
         </div>
         <div
           id="navbar-lg"
@@ -114,12 +123,12 @@ export const Header = () => {
                         </Link>
                       );
                     })}
-                    <Link href="/login">
+                    {/* <Link href="/login">
                       <div className="hover:bg-gray-50 h-full text-2xl flex items-center m-4 font-noto-serif text-gray-900  ring-gray-200">
                         <ArrowRightOnRectangleIcon className="w-6 h-6 mr-3" />
                         ログイン
                       </div>
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
               </div>
