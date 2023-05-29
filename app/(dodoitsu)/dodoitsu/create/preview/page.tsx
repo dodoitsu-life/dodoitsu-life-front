@@ -1,15 +1,46 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useMutation } from "react-query";
 import { HeartIcon } from "@heroicons/react/24/outline";
 
+import { Button } from "@components/Button";
 import { TwitterShareButton } from "@components/TwitterShareButton";
 import { Card } from "@components/Card";
 
 const DodoitsuCreatePreview = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const content = decodeURIComponent(searchParams.get("content") || "");
   const comment = decodeURIComponent(searchParams.get("comment") || "");
+
+  const {
+    mutate: postDodoitsu,
+    isLoading: isPostDodoitsuLoading,
+    isError: isPostDodoitsuError,
+  } = useMutation(async () => {
+    const res = await fetch("/dodoitsu/api", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        content,
+        comment,
+      }),
+    });
+    return res.json();
+  });
+
+  const handlePostDodoitsu = async () => {
+    await postDodoitsu();
+    if (isPostDodoitsuError) {
+      alert("都々逸の投稿に失敗しました");
+      return;
+    }
+    // TODO: 本来は投稿した都々逸のIDを取得して遷移する
+    router.push("/dodoitsu/detail/1");
+  };
 
   return (
     <main className="container mx-auto px-4 flex justify-center">
@@ -49,8 +80,8 @@ const DodoitsuCreatePreview = () => {
                   )}
 
                   <div className="flex items-center justify-end border-t border-gray-300 pt-5">
-                    <TwitterShareButton text="この都々逸をシェアする" />
-                    <button className="ml-3 bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-2 rounded-full">
+                    <TwitterShareButton />
+                    <button className="ml-3 bg-red-300 hover:bg-red-400 text-white font-bold p-2 rounded-full">
                       <HeartIcon className="h-8 w-8" />
                     </button>
                   </div>
@@ -58,11 +89,13 @@ const DodoitsuCreatePreview = () => {
               </Card>
             </div>
 
-            <input
-              type="button"
-              className="mx-8 mb-12 inline-flex items-center justify-center px-3 py-2 text-lg font-medium text-white bg-primary border border-transparent rounded-md shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-dark cursor-pointer"
-              value="この内容で都々逸を投稿する"
-            />
+            <Button
+              className="mx-8 mb-12"
+              disabled={isPostDodoitsuLoading}
+              onClick={handlePostDodoitsu}
+            >
+              この内容で都々逸を投稿する
+            </Button>
           </Card>
         </section>
       </div>

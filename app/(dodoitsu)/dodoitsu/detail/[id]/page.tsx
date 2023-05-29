@@ -1,21 +1,21 @@
 "use client";
 
 import { useParams, usePathname } from "next/navigation";
-import { HeartIcon } from "@heroicons/react/24/outline";
+// import { HeartIcon } from "@heroicons/react/24/outline";
 
 import { TwitterShareButton } from "@components/TwitterShareButton";
 import twitterShareLinkGen from "@/utils/twitterShareLinkGen";
 import { Card } from "@components/Card";
 
 const DodoitsuDetail = () => {
-  const { id } = useParams();
+  // const { id } = useParams();
   const content = "test";
   const comment = "test";
   const autherTwitterId = "";
   const pathName = usePathname();
 
   const twitterShareLink = twitterShareLinkGen({
-    text: `都々逸をシェアしました！\n\n「${content}」\n\n`,
+    text: `${content}\n`,
     hashtags: ["都々逸ライフ", "都々逸"],
     url: `https://dodoitsu.vercel.app${pathName}`,
     via: autherTwitterId,
@@ -39,10 +39,7 @@ const DodoitsuDetail = () => {
               )}
 
               <div className="flex items-center justify-end border-t border-gray-300 pt-5">
-                <TwitterShareButton
-                  href={twitterShareLink}
-                  text="この都々逸をシェアする"
-                />
+                <TwitterShareButton href={twitterShareLink} />
                 {/* <button className="ml-3 bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-2 rounded-full">
                   <HeartIcon className="h-8 w-8" />
                 </button> */}
