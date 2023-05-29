@@ -39,20 +39,23 @@ const Home = () => {
         {/* <section id="user-info"></section> */}
         <section id="yesterday-bests" className="mt-24">
           <h2 className="mb-8 text-center lg:text-3xl text-lg font-bold text-gray-900 dark:text-white">
-            昨日、最もいいねを集めた都々逸
+            人気の都々逸
           </h2>
           <PopularDodoitsuList />
+          <div className="mt-7 text-center">
+            <LinkButton text="もっと見る" href="/dodoitsu?mode=latest" />
+          </div>
         </section>
 
         <section id="yaesterday-posts" className="my-24">
           <h2 className="mb-8 text-center lg:text-3xl text-lg font-bold text-gray-900 dark:text-white">
-            昨日投稿された都々逸
+            最新の都々逸
           </h2>
 
           <NewDodoitsuList />
 
           <div className="mt-7 text-center">
-            <LinkButton text="最新の投稿を見る" href="/" />
+            <LinkButton text="もっと見る" href="/dodoitsu?mode=latest" />
           </div>
         </section>
       </div>

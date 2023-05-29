@@ -1,18 +1,28 @@
 "use client";
 
 import { useAtomValue } from "jotai";
+import { useSearchParams } from "next/navigation";
 import { DodoitsuListAtom } from "@atoms/dodoitsu";
 import { Card } from "@components/Card";
 
 const Home = () => {
   const dodoitsuList = useAtomValue(DodoitsuListAtom);
+  const searchParams = useSearchParams();
+
+  const mode = searchParams.get("mode") || "";
+  const isRankingMode = mode === "ranking";
+  const isLatestMode = mode === "latest";
+
   return (
     <main className="container mx-auto px-4 flex justify-center">
-      <div className="w-full max-w-7xl mt-12">
+      <div className="w-full max-w-7xl mt-8">
         <section id="dodoitsu-list">
-          <h1 className="mb-16 text-center lg:text-3xl text-lg font-bold text-gray-900 dark:text-white">
-            最近投稿された都々逸
-          </h1>
+          {mode && (
+            <h1 className="mb-8 text-center lg:text-3xl text-lg font-bold text-gray-900 dark:text-white">
+              {isRankingMode && "人気の都々逸"}
+              {isLatestMode && "最新の都々逸"}
+            </h1>
+          )}
           <div>
             {dodoitsuList.map((dodoitsu, index) => (
               <div key={index} className="my-8">
