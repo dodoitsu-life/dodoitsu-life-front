@@ -22,7 +22,7 @@ const Home = () => {
   };
 
   return (
-    <main className="container mx-auto px-4 flex justify-center">
+    <main className="container mx-auto px-4 mb-24 flex justify-center">
       <div className="w-full max-w-7xl mt-8">
         <section id="dodoitsu-list">
           {mode && (
@@ -46,14 +46,12 @@ const Home = () => {
           </div>
         </section>
 
-        <div className="mb-24">
-          <Pagination
-            currentPage={currentPage}
-            onPageSelect={onPageSelect}
-            total={10}
-            itemsPerPage={10}
-          />
-        </div>
+        <Pagination
+          currentPage={currentPage}
+          onPageSelect={onPageSelect}
+          total={10}
+          itemsPerPage={10}
+        />
       </div>
     </main>
   );
