@@ -50,8 +50,8 @@ const Home = () => {
           <Pagination
             currentPage={currentPage}
             onPageSelect={onPageSelect}
-            total={40}
-            itemsPerPage={5}
+            total={10}
+            itemsPerPage={10}
           />
         </div>
       </div>

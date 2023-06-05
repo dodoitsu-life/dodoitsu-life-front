@@ -67,7 +67,7 @@ export const Pagination = ({
           middleButtonPages[middleButtonPages.length - 1] !==
             Math.ceil(total / itemsPerPage) - 1 && <DisabledButton />}
 
-        {total > 5 && (
+        {total > itemsPerPage && (
           <button
             className={`
 							btn ${currentPage === Math.ceil(total / itemsPerPage) && "btn-active"} ${
