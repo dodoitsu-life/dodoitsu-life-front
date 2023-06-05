@@ -4,6 +4,8 @@ import { useAtomValue } from "jotai";
 import { useSearchParams } from "next/navigation";
 import { DodoitsuListAtom } from "@atoms/dodoitsu";
 import { Card } from "@components/Card";
+import { Pagination } from "@/app/_components/Pagination";
+import { useState } from "react";
 
 const Home = () => {
   const dodoitsuList = useAtomValue(DodoitsuListAtom);
@@ -13,8 +15,14 @@ const Home = () => {
   const isRankingMode = mode === "ranking";
   const isLatestMode = mode === "latest";
 
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const onPageSelect = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return (
-    <main className="container mx-auto px-4 flex justify-center">
+    <main className="container mx-auto px-4 mb-24 flex justify-center">
       <div className="w-full max-w-7xl mt-8">
         <section id="dodoitsu-list">
           {mode && (
@@ -37,6 +45,13 @@ const Home = () => {
             ))}
           </div>
         </section>
+
+        <Pagination
+          currentPage={currentPage}
+          onPageSelect={onPageSelect}
+          total={10}
+          itemsPerPage={10}
+        />
       </div>
     </main>
   );
