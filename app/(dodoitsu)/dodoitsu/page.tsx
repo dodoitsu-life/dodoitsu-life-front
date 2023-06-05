@@ -18,7 +18,6 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const onPageSelect = (page: number) => {
-    console.log(page);
     setCurrentPage(page);
   };
 
