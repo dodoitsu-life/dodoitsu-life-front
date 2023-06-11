@@ -1,11 +1,16 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { Dodoitsu } from "@/types/Dodoitsu";
 
-export async function GET() {
+export const dynamic = "force-dynamic";
+export async function GET(
+  _: NextRequest,
+  { params }: { params: { id: string } }
+) {
   const sleep = (waitTime: number) =>
     new Promise((resolve) => setTimeout(resolve, waitTime));
   await sleep(1500);
 
+  console.log(params.id);
   const data = {
     id: "1",
     author: "string",

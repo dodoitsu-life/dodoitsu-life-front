@@ -1,6 +1,6 @@
 import { Dodoitsu } from "@/types/Dodoitsu";
 
 export type Props = {
-  dodoitsu?: Dodoitsu;
+  dodoitsuList?: Dodoitsu[];
   isLoading?: boolean;
 };

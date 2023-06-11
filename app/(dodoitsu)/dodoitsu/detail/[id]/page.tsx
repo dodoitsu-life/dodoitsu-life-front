@@ -1,5 +1,5 @@
 import { Dodoitsu } from "@/types/Dodoitsu";
-import { DodoitsuCard } from "../../_components/DodoitsuCard";
+import { DodoitsuCard } from "../../../_components/DodoitsuCard";
 import { cache } from "react";
 
 type Params = {
@@ -7,7 +7,7 @@ type Params = {
 };
 
 const getDodoitsu = cache(async (id: number): Promise<Dodoitsu> => {
-  const res = await fetch(`http://localhost:3000/dodoitsu/api/${id}`, {
+  const res = await fetch(`http://localhost:3000/api/dodoitsu/${id}`, {
     method: "GET",
     next: { revalidate: 60 },
     headers: {
