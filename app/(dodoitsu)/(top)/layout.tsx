@@ -1,4 +1,3 @@
-import { Card } from "@components/Card";
 import { LinkButton } from "@components/LinkButton/LinkButton";
 
 export default function Layout({
