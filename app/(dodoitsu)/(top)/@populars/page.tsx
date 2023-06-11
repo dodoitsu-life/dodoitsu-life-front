@@ -1,15 +1,38 @@
-import { useAtomValue } from "jotai";
+import { cache } from "react";
 import { TrophyIcon, StarIcon } from "@heroicons/react/24/outline";
 
-import { yesterdaysPopularDodoitsuAtom } from "@atoms/dodoitsu";
-import { Card } from "@components/Card";
+import { Dodoitsu } from "@/types/Dodoitsu";
+import { Card } from "@/app/_components/Card";
 
-export const PopularDodoitsuList = () => {
-  const yesterdaysPopularDodoitsu = useAtomValue(yesterdaysPopularDodoitsuAtom);
+type DodoitsuListResponse = {
+  results: Dodoitsu[];
+  count: number;
+};
+
+// 一ページ当たりに表示する都々逸の件数
+const ITEMS_PER_PAGE = 3;
+
+const getDodoitsuList = cache(
+  async (page: string): Promise<DodoitsuListResponse> => {
+    const params = { mode: "ranking", page, limit: `${ITEMS_PER_PAGE}` };
+    const query = new URLSearchParams(params);
+    const res = await fetch(`http://localhost:3000/api/dodoitsu?${query}`, {
+      method: "GET",
+      cache: "force-cache",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return res.json();
+  }
+);
+
+export default async () => {
+  const { results: dodoitsuList } = await getDodoitsuList(`1`);
 
   return (
     <div>
-      {yesterdaysPopularDodoitsu.map((dodoitsu, index) => {
+      {dodoitsuList.map((dodoitsu, index) => {
         const isFirst = index === 0;
         const marginButtom = isFirst ? "mb-5" : "mb-3  w-11/12";
         const Icon = isFirst ? (

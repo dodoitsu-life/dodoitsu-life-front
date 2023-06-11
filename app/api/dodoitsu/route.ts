@@ -79,7 +79,10 @@ export async function GET(req: NextRequest) {
     },
   ];
 
-  return NextResponse.json({ results: data, count: 999 });
+  return NextResponse.json({
+    results: data.slice(0, Number(limit)),
+    count: 999,
+  });
 }
 
 export async function POST() {
