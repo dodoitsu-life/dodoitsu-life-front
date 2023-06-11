@@ -43,7 +43,7 @@ const Home = () => {
           </h2>
           <PopularDodoitsuList />
           <div className="mt-7 text-center">
-            <LinkButton text="もっと見る" href="/dodoitsu?mode=latest" />
+            <LinkButton text="もっと見る" href="/dodoitsu/ranking?page=1" />
           </div>
         </section>
 
@@ -55,7 +55,7 @@ const Home = () => {
           <NewDodoitsuList />
 
           <div className="mt-7 text-center">
-            <LinkButton text="もっと見る" href="/dodoitsu?mode=latest" />
+            <LinkButton text="もっと見る" href="/dodoitsu/latest?page=1" />
           </div>
         </section>
       </div>

@@ -1,60 +1,44 @@
-"use client";
-import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useMutation } from "react-query";
+import { cache } from "react";
+import { redirect } from "next/navigation";
 
 import { Dodoitsu } from "@/types/Dodoitsu";
-import { Pagination } from "@/app/_components/Pagination";
 import { DodoitsuList } from "../../_components/DodoitsuList";
+import { PaginationLink } from "../_components/PaginationLink";
 
 // 一ページ当たりに表示する都々逸の件数
 const ITEMS_PER_PAGE = 10;
 
-export default () => {
-  const router = useRouter();
+type DodoitsuListResponse = {
+  results: Dodoitsu[];
+  count: number;
+};
 
-  const searchParams = useSearchParams();
-  const page = searchParams.get("page");
-
-  const [dodoitsuList, setDodoitsuList] = useState<Dodoitsu[]>([]);
-  const [currentPage, setCurrentPage] = useState(page ? Number(page) : 1);
-  const [totalCount, setTotalCount] = useState(1);
-
-  const {
-    mutate: fetchDodoitsuList,
-    isLoading,
-    isError,
-  } = useMutation(async ({ mode, page }: { mode: string; page: string }) => {
-    const params = { mode, page, limit: `${ITEMS_PER_PAGE}` };
+const getDodoitsuList = cache(
+  async (page: string): Promise<DodoitsuListResponse> => {
+    const params = { mode: "latest", page, limit: `${ITEMS_PER_PAGE}` };
     const query = new URLSearchParams(params);
-
-    const res = await fetch(`/api/dodoitsu?${query}`, {
+    const res = await fetch(`http://localhost:3000/api/dodoitsu?${query}`, {
       method: "GET",
+      cache: "force-cache",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const { results, count } = await res.json();
-    setDodoitsuList(results);
-    setTotalCount(count);
-  });
-
-  const onPageSelect = (targetPage: number) => {
-    setCurrentPage(targetPage);
-    router.push(`dodoitsu/latest?page=${targetPage}`);
-  };
-
-  useEffect(() => {
-    fetchDodoitsuList({ mode: "latest", page: `${page}` });
-  }, [page]);
-
-  if (isLoading) {
-    return <DodoitsuList isLoading={true} />;
+    return res.json();
   }
+);
 
-  if (isError) {
-    alert("都々逸の取得に失敗しました。");
-    router.back();
+export default async ({ searchParams }: { searchParams: { page: number } }) => {
+  const page = Number(searchParams.page);
+  const { results: dodoitsuList, count } = await getDodoitsuList(`${page}`);
+
+  const maxPage = Math.ceil(count / ITEMS_PER_PAGE);
+  const pageLinkGen = (page: number) => `/dodoitsu/latest?page=${page}`;
+
+  if (page < 1 || page > maxPage || isNaN(page)) {
+    if (page < 1) redirect("/dodoitsu/latest?page=1");
+    if (page > maxPage) redirect(`/dodoitsu/latest?page=${maxPage}`);
+    if (isNaN(page)) redirect("/dodoitsu/latest?page=1");
   }
 
   return (
@@ -66,13 +50,7 @@ export default () => {
 
         <DodoitsuList dodoitsuList={dodoitsuList} />
       </section>
-
-      <Pagination
-        currentPage={currentPage}
-        onPageSelect={onPageSelect}
-        total={totalCount}
-        itemsPerPage={ITEMS_PER_PAGE}
-      />
+      <PaginationLink page={page} maxPage={maxPage} pageLinkGen={pageLinkGen} />
     </div>
   );
 };

@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export async function GET(req: NextRequest) {
   const sleep = (waitTime: number) =>
     new Promise((resolve) => setTimeout(resolve, waitTime));
-  await sleep(1000);
+  await sleep(2000);
 
   const { searchParams } = new URL(req.url);
   const mode = searchParams.get("mode");
@@ -79,7 +79,7 @@ export async function GET(req: NextRequest) {
     },
   ];
 
-  return NextResponse.json({ results: data, count: 12 });
+  return NextResponse.json({ results: data, count: 999 });
 }
 
 export async function POST() {
