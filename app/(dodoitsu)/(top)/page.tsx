@@ -1,7 +1,7 @@
 import { Card } from "@components/Card";
 import { LinkButton } from "@components/LinkButton/LinkButton";
 
-export default () => {
+export default function TopPage() {
   return (
     <section id="site-discription">
       <Card>
@@ -29,4 +29,4 @@ export default () => {
       </Card>
     </section>
   );
-};
+}
