@@ -8,7 +8,7 @@ export default function Error({ error }: { error: Error }) {
     console.warn(error);
     alert("都々逸の取得に失敗しました。");
     router.back();
-  }, [error]);
+  }, [error, router]);
 
   return <div />;
 }

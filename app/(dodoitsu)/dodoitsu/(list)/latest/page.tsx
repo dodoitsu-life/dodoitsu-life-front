@@ -28,7 +28,11 @@ const getDodoitsuList = cache(
   }
 );
 
-export default async ({ searchParams }: { searchParams: { page: number } }) => {
+export default async function DodoitsuLatest({
+  searchParams,
+}: {
+  searchParams: { page: number };
+}) {
   const page = Number(searchParams.page);
   const { results: dodoitsuList, count } = await getDodoitsuList(`${page}`);
 
@@ -53,4 +57,4 @@ export default async ({ searchParams }: { searchParams: { page: number } }) => {
       <PaginationLink page={page} maxPage={maxPage} pageLinkGen={pageLinkGen} />
     </div>
   );
-};
+}

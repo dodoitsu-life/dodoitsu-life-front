@@ -14,6 +14,7 @@ const getDodoitsu = cache(async (id: number): Promise<Dodoitsu> => {
       "Content-Type": "application/json",
     },
   });
+  throw new Error("test");
   return res.json();
 });
 

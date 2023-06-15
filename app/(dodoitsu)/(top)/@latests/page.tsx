@@ -25,7 +25,7 @@ const getDodoitsuList = cache(
   }
 );
 
-export default async () => {
+export default async function TopLatests() {
   const { results: dodoitsuList } = await getDodoitsuList(`1`);
 
   return (
@@ -61,4 +61,4 @@ export default async () => {
       </div>
     </div>
   );
-};
+}
