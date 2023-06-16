@@ -1,4 +1,5 @@
 import { cache } from "react";
+import { appConfig } from "@/config/app.config";
 import { TrophyIcon, StarIcon } from "@heroicons/react/24/outline";
 
 import { Dodoitsu } from "@/types/Dodoitsu";
@@ -11,12 +12,13 @@ type DodoitsuListResponse = {
 
 // 一ページ当たりに表示する都々逸の件数
 const ITEMS_PER_PAGE = 3;
+const projectUrl = appConfig().projectUrl;
 
 const getDodoitsuList = cache(
   async (page: string): Promise<DodoitsuListResponse> => {
     const params = { mode: "ranking", page, limit: `${ITEMS_PER_PAGE}` };
     const query = new URLSearchParams(params);
-    const res = await fetch(`http://localhost:3000/api/dodoitsu?${query}`, {
+    const res = await fetch(`${projectUrl}/api/dodoitsu?${query}`, {
       method: "GET",
       cache: "force-cache",
       headers: {

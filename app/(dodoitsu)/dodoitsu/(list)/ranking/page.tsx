@@ -1,5 +1,6 @@
 import { cache } from "react";
 import { redirect } from "next/navigation";
+import { appConfig } from "@/config/app.config";
 
 import { Dodoitsu } from "@/types/Dodoitsu";
 import { DodoitsuList } from "../../_components/DodoitsuList";
@@ -7,6 +8,7 @@ import { PaginationLink } from "../_components/PaginationLink";
 
 // 一ページ当たりに表示する都々逸の件数
 const ITEMS_PER_PAGE = 10;
+const projectUrl = appConfig().projectUrl;
 
 type DodoitsuListResponse = {
   results: Dodoitsu[];
@@ -17,7 +19,7 @@ const getDodoitsuList = cache(
   async (page: string): Promise<DodoitsuListResponse> => {
     const params = { mode: "ranking", page, limit: `${ITEMS_PER_PAGE}` };
     const query = new URLSearchParams(params);
-    const res = await fetch(`http://localhost:3000/api/dodoitsu?${query}`, {
+    const res = await fetch(`${projectUrl}/api/dodoitsu?${query}`, {
       method: "GET",
       cache: "force-cache",
       headers: {
