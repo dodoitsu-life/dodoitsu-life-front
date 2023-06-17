@@ -24,32 +24,35 @@ const DodoitsuCreatePreview = () => {
     posted_at: new Date(),
   };
 
-  const {
-    mutate: postDodoitsu,
-    isLoading: isPostDodoitsuLoading,
-    isError: isPostDodoitsuError,
-  } = useMutation(async () => {
-    const res = await fetch("/api/dodoitsu", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+  const { mutate: postDodoitsu, isLoading: isPostDodoitsuLoading } =
+    useMutation(
+      async () => {
+        const res = await fetch("/api/dodoitsu", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            content,
+            comment,
+          }),
+        });
+        const { id } = await res.json();
+        return id;
       },
-      body: JSON.stringify({
-        content,
-        comment,
-      }),
-    });
-    const { id } = await res.json();
-    setDodoitsuId(id);
-  });
+      {
+        onSuccess: (id) => {
+          setDodoitsuId(id);
+          router.push(`/dodoitsu/detail/${id}`);
+        },
+        onError: () => {
+          alert("都々逸の投稿に失敗しました");
+        },
+      }
+    );
 
-  const handlePostDodoitsu = async () => {
-    await postDodoitsu();
-    if (isPostDodoitsuError) {
-      alert("都々逸の投稿に失敗しました");
-      return;
-    }
-    router.push(`/dodoitsu/detail/${dodoitsuId}`);
+  const handlePostDodoitsu = () => {
+    postDodoitsu();
   };
 
   return (
