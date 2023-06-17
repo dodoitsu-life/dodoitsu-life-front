@@ -1,12 +1,11 @@
 "use client";
-
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMutation } from "react-query";
-import { HeartIcon } from "@heroicons/react/24/outline";
 
+import { Dodoitsu } from "@/src/types/Dodoitsu";
 import { Button } from "@components/Button";
-import { TwitterShareButton } from "@components/TwitterShareButton";
 import { Card } from "@components/Card";
+import { DodoitsuCard } from "@/app/(dodoitsu)/_components/DodoitsuCard";
 
 const DodoitsuCreatePreview = () => {
   const router = useRouter();
@@ -14,32 +13,41 @@ const DodoitsuCreatePreview = () => {
   const content = decodeURIComponent(searchParams.get("content") || "");
   const comment = decodeURIComponent(searchParams.get("comment") || "");
 
-  const {
-    mutate: postDodoitsu,
-    isLoading: isPostDodoitsuLoading,
-    isError: isPostDodoitsuError,
-  } = useMutation(async () => {
-    const res = await fetch("/dodoitsu/api", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        content,
-        comment,
-      }),
-    });
-    return res.json();
-  });
+  const dodoitsu: Dodoitsu = {
+    id: "",
+    content,
+    comment,
+    posted_at: new Date(),
+  };
 
-  const handlePostDodoitsu = async () => {
-    await postDodoitsu();
-    if (isPostDodoitsuError) {
-      alert("都々逸の投稿に失敗しました");
-      return;
-    }
-    // TODO: 本来は投稿した都々逸のIDを取得して遷移する
-    router.push("/dodoitsu/detail/1");
+  const { mutate: postDodoitsu, isLoading: isPostDodoitsuLoading } =
+    useMutation(
+      async () => {
+        const res = await fetch("/api/dodoitsu", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            content,
+            comment,
+          }),
+        });
+        const { id } = await res.json();
+        return id;
+      },
+      {
+        onSuccess: (id) => {
+          router.push(`/dodoitsu/detail/${id}`);
+        },
+        onError: () => {
+          alert("都々逸の投稿に失敗しました");
+        },
+      }
+    );
+
+  const handlePostDodoitsu = () => {
+    postDodoitsu();
   };
 
   return (
@@ -67,26 +75,7 @@ const DodoitsuCreatePreview = () => {
         <section id="contents" className="mb-20">
           <Card>
             <div className="m-8">
-              <Card>
-                <div className="m-8">
-                  <div className="text-xl lg:text-3xl font-bold font-noto-serif text-gray-900 dark:text-white mb-6">
-                    {content}
-                  </div>
-
-                  {comment && (
-                    <div className="text-md lg:text-lg border-t border-gray-300 py-5 font-bold font-noto-serif text-gray-900 dark:text-white whitespace-pre-wrap">
-                      {comment}
-                    </div>
-                  )}
-
-                  <div className="flex items-center justify-end border-t border-gray-300 pt-5">
-                    <TwitterShareButton className="w-5 h-5 lg:w-8 lg:h-8" />
-                    <button className="ml-3 bg-red-300 hover:bg-red-400 text-white font-bold p-2 rounded-full">
-                      <HeartIcon className="w-5 h-5 lg:w-8 lg:h-8" />
-                    </button>
-                  </div>
-                </div>
-              </Card>
+              <DodoitsuCard dodoitsu={dodoitsu} displayFooter={false} />
             </div>
 
             <Button

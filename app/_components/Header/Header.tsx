@@ -21,12 +21,12 @@ export const Header = () => {
     {
       name: "最新の投稿",
       icon: ClipboardIcon,
-      link: "/dodoitsu?mode=latest",
+      link: "/dodoitsu/latest?page=1",
     },
     {
       name: "ランキング",
       icon: TrophyIcon,
-      link: "/dodoitsu?mode=ranking",
+      link: "/dodoitsu/ranking?page=1",
     },
   ] satisfies Menu[];
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
