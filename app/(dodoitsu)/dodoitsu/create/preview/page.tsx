@@ -3,11 +3,9 @@ import { useState } from "react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMutation } from "react-query";
-import { HeartIcon } from "@heroicons/react/24/outline";
 
 import { Dodoitsu } from "@/src/types/Dodoitsu";
 import { Button } from "@components/Button";
-import { TwitterShareButton } from "@components/TwitterShareButton";
 import { Card } from "@components/Card";
 import { DodoitsuCard } from "@/app/(dodoitsu)/_components/DodoitsuCard";
 
@@ -51,8 +49,7 @@ const DodoitsuCreatePreview = () => {
       alert("都々逸の投稿に失敗しました");
       return;
     }
-    // TODO: 本来は投稿した都々逸のIDを取得して遷移する
-    // router.push(`/dodoitsu/detail/${dodoitsuId}`);
+    router.push(`/dodoitsu/detail/${dodoitsuId}`);
   };
 
   return (

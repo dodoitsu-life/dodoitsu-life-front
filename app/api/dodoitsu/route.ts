@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Dodoitsu } from "@/src/types/Dodoitsu";
 import { createDodoitsu } from "@/src/server/dodoitsu/createDodoitsu";
 
 // 1. 動的レンダリングを強制する
