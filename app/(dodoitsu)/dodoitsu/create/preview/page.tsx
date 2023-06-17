@@ -1,10 +1,11 @@
 "use client";
+import { useState } from "react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMutation } from "react-query";
 import { HeartIcon } from "@heroicons/react/24/outline";
 
-import { Dodoitsu } from "@/types/Dodoitsu";
+import { Dodoitsu } from "@/src/types/Dodoitsu";
 import { Button } from "@components/Button";
 import { TwitterShareButton } from "@components/TwitterShareButton";
 import { Card } from "@components/Card";
@@ -15,6 +16,8 @@ const DodoitsuCreatePreview = () => {
   const searchParams = useSearchParams();
   const content = decodeURIComponent(searchParams.get("content") || "");
   const comment = decodeURIComponent(searchParams.get("comment") || "");
+
+  const [dodoitsuId, setDodoitsuId] = useState("");
 
   const dodoitsu: Dodoitsu = {
     id: "",
@@ -28,7 +31,7 @@ const DodoitsuCreatePreview = () => {
     isLoading: isPostDodoitsuLoading,
     isError: isPostDodoitsuError,
   } = useMutation(async () => {
-    const res = await fetch("/dodoitsu/api", {
+    const res = await fetch("/api/dodoitsu", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +41,8 @@ const DodoitsuCreatePreview = () => {
         comment,
       }),
     });
-    return res.json();
+    const { id } = await res.json();
+    setDodoitsuId(id);
   });
 
   const handlePostDodoitsu = async () => {
@@ -48,7 +52,7 @@ const DodoitsuCreatePreview = () => {
       return;
     }
     // TODO: 本来は投稿した都々逸のIDを取得して遷移する
-    router.push("/dodoitsu/detail/1");
+    // router.push(`/dodoitsu/detail/${dodoitsuId}`);
   };
 
   return (

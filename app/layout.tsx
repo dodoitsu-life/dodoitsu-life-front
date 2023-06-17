@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
+
 import { Header } from "@components/Header/Header";
 import { Footer } from "@components/Footer/Footer";
 import { JotaiProvider } from "@components/Providers/JotaiProvider/JotaiProvider";

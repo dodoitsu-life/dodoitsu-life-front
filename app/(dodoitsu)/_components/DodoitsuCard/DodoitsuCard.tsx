@@ -1,6 +1,6 @@
 import { Props } from "./types";
 import { TwitterShareButton } from "@components/TwitterShareButton";
-import twitterShareLinkGen from "@/utils/twitterShareLinkGen";
+import twitterShareLinkGen from "@/src/utils/twitterShareLinkGen";
 import { Card } from "@components/Card";
 
 export const DodoitsuCard = ({

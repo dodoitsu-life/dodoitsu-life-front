@@ -1,4 +1,4 @@
-import { Dodoitsu } from "@/types/Dodoitsu";
+import { Dodoitsu } from "@/src/types/Dodoitsu";
 import { atom, Atom } from "jotai";
 
 export const yesterdaysPopularDodoitsuAtom: Atom<Dodoitsu[]> = atom(() => [

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -22,7 +23,7 @@
     "paths": {
       "@/*": ["./*"],
       "@components/*": ["./app/_components/*"],
-      "@atoms/*": ["./atoms/*"]
+      "@atoms/*": ["src/atoms/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

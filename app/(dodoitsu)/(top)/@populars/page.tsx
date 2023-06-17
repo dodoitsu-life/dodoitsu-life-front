@@ -1,8 +1,8 @@
 import { cache } from "react";
-import { appConfig } from "@/config/app.config";
 import { TrophyIcon, StarIcon } from "@heroicons/react/24/outline";
+import { getPopularDodoitsuList } from "@/src/server/dodoitsu/getDodoitsuList";
 
-import { Dodoitsu } from "@/types/Dodoitsu";
+import { Dodoitsu } from "@/src/types/Dodoitsu";
 import { Card } from "@/app/_components/Card";
 
 type DodoitsuListResponse = {
@@ -12,25 +12,28 @@ type DodoitsuListResponse = {
 
 // 一ページ当たりに表示する都々逸の件数
 const ITEMS_PER_PAGE = 3;
-const projectUrl = appConfig().projectUrl;
+// const projectUrl = appConfig().projectUrl;
 
-const getDodoitsuList = cache(
-  async (page: string): Promise<DodoitsuListResponse> => {
-    const params = { mode: "ranking", page, limit: `${ITEMS_PER_PAGE}` };
-    const query = new URLSearchParams(params);
-    const res = await fetch(`${projectUrl}/api/dodoitsu?${query}`, {
-      method: "GET",
-      cache: "force-cache",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    return res.json();
-  }
-);
+// const getDodoitsuList = cache(
+//   async (page: string): Promise<DodoitsuListResponse> => {
+//     const params = { mode: "ranking", page, limit: `${ITEMS_PER_PAGE}` };
+//     const query = new URLSearchParams(params);
+//     const res = await fetch(`${projectUrl}/api/dodoitsu?${query}`, {
+//       method: "GET",
+//       cache: "force-cache",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+//     return res.json();
+//   }
+// );
 
 export default async function TopPopulars() {
-  const { results: dodoitsuList } = await getDodoitsuList(`1`);
+  const { dodoitsuList } = await getPopularDodoitsuList({
+    page: 1,
+    limit: ITEMS_PER_PAGE,
+  });
 
   return (
     <div>
