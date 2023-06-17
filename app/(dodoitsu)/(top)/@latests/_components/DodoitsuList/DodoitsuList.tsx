@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Props } from "./types";
 import { Card } from "@/app/_components/Card";
 
@@ -27,7 +28,10 @@ export const DodoitsuList = ({ dodoitsuList, loading = false }: Props) => {
   }
 
   return (
-    <div id="infinite-animation" className="w-full overflow-hidden">
+    <div
+      id="infinite-animation"
+      className="w-full pt-1 overflow-x-hidden overflow-y-auto"
+    >
       <div className="flex">
         {["0", "60"].map((delay) => {
           return (
@@ -42,13 +46,15 @@ export const DodoitsuList = ({ dodoitsuList, loading = false }: Props) => {
                       key={index}
                       className="mr-5 min-w-[600px] lg:min-w-[800px]"
                     >
-                      <Card key={index}>
-                        <div className="m-5">
-                          <div className="h-5 text-md lg:text-xl font-bold font-noto-serif text-gray-900 dark:text-white">
-                            {dodoitsuList[index] && dodoitsuList[index].content}
+                      <Link href={`/dodoitsu/detail/${dodoitsuList[index].id}`}>
+                        <Card key={index} clickable>
+                          <div className="m-5">
+                            <div className="h-5 text-md lg:text-xl font-bold font-noto-serif text-gray-900 dark:text-white">
+                              {dodoitsuList[index].content}
+                            </div>
                           </div>
-                        </div>
-                      </Card>
+                        </Card>
+                      </Link>
                     </div>
                   );
                 })}
