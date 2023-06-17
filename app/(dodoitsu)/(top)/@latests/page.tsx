@@ -1,6 +1,5 @@
 import { getLatestDodoitsuList } from "@/src/server/dodoitsu/getDodoitsuList";
 
-import { Dodoitsu } from "@/src/types/Dodoitsu";
 import { Card } from "@/app/_components/Card";
 
 // 一ページ当たりに表示する都々逸の件数
