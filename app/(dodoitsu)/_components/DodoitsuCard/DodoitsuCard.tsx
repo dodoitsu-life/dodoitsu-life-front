@@ -6,6 +6,7 @@ import { Card } from "@components/Card";
 export const DodoitsuCard = ({
   dodoitsu,
   isLoading = false,
+  clickable = false,
   displayContent = true,
   displayComment = true,
   displayFooter = true,
@@ -49,7 +50,7 @@ export const DodoitsuCard = ({
   });
 
   return (
-    <Card>
+    <Card clickable={clickable}>
       <div className="m-8">
         {displayContent && (
           <div className="text-xl lg:text-3xl font-bold font-noto-serif text-gray-900 dark:text-white mb-6">
@@ -67,7 +68,7 @@ export const DodoitsuCard = ({
           <div className="flex items-center justify-end border-t border-gray-300 pt-5">
             <TwitterShareButton
               href={twitterShareLink}
-              className="w-5 h-5 lg:w-8 lg:h-8"
+              className="w-5 h-5 lg:w-8 lg:h-8 z-10"
             />
             {/* <button className="ml-3 bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-2 rounded-full">
           <HeartIcon className="h-8 w-8" />

@@ -1,5 +1,6 @@
 import { Props } from "./types";
 import { DodoitsuCard } from "../../../_components/DodoitsuCard";
+import Link from "next/link";
 
 export const DodoitsuList = ({ dodoitsuList, isLoading }: Props) => {
   if (isLoading || !dodoitsuList) {
@@ -28,11 +29,14 @@ export const DodoitsuList = ({ dodoitsuList, isLoading }: Props) => {
     <div>
       {dodoitsuList.map((dodoitsu, index) => (
         <div key={index} className="my-8">
-          <DodoitsuCard
-            dodoitsu={dodoitsu}
-            displayComment={false}
-            displayFooter={false}
-          />
+          <Link href={`/dodoitsu/detail/${dodoitsu.id}`}>
+            <DodoitsuCard
+              clickable
+              dodoitsu={dodoitsu}
+              displayComment={false}
+              displayFooter={false}
+            />
+          </Link>
         </div>
       ))}
     </div>

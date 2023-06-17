@@ -1,6 +1,7 @@
 import { Props } from "./types";
 import { TrophyIcon, StarIcon } from "@heroicons/react/24/outline";
 import { Card } from "@/app/_components/Card";
+import Link from "next/link";
 
 export const DodoitsuList = ({ dodoitsuList, loading = false }: Props) => {
   // loadingがtrueの場合
@@ -55,16 +56,18 @@ export const DodoitsuList = ({ dodoitsuList, loading = false }: Props) => {
 
         return (
           <div key={index} className={wrapperClass}>
-            <Card>
-              <div className="m-5 flex">
-                {Icon}
-                <div
-                  className={`${textSize} font-bold font-noto-serif text-gray-900 dark:text-white`}
-                >
-                  {dodoitsu.content}
+            <Link href={`/dodoitsu/detail/${dodoitsu.id}`}>
+              <Card clickable>
+                <div className="m-5 flex">
+                  {Icon}
+                  <div
+                    className={`${textSize} font-bold font-noto-serif text-gray-900 dark:text-white`}
+                  >
+                    {dodoitsu.content}
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </Link>
           </div>
         );
       })}
