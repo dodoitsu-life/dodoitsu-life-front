@@ -1,3 +1,5 @@
-export default function Loading() {
-  return <div>loading</div>;
+import { DodoitsuList } from "./_components/DodoitsuList";
+
+export default function TopPopulars() {
+  return <DodoitsuList loading />;
 }

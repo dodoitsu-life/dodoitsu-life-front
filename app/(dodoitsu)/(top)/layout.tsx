@@ -1,5 +1,3 @@
-import { LinkButton } from "@components/LinkButton/LinkButton";
-
 export default function Layout({
   children,
   latests,
@@ -17,8 +15,7 @@ export default function Layout({
           人気の都々逸
         </h2>
         <div className="mt-7 text-center">
-          {populars}
-          <LinkButton text="もっと見る" href="/dodoitsu/ranking?page=1" />
+          <div className="mb-5">{populars}</div>
         </div>
       </section>
 
@@ -27,10 +24,7 @@ export default function Layout({
           最新の都々逸
         </h2>
 
-        <div className="mt-7 text-center">
-          <div className="mb-3">{latests}</div>
-          <LinkButton text="もっと見る" href="/dodoitsu/latest?page=1" />
-        </div>
+        <div className="mt-7 text-center">{latests}</div>
       </section>
     </div>
   );

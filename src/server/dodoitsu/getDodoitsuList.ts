@@ -23,7 +23,10 @@ export const getLatestDodoitsuList = async (
   //     .catch((error) => {
   //       throw new Error(error);
   //     });
-  const dodoitsuList: Dodoitsu[] = dodoitsuListMock.splice(0, query.limit);
+  const dodoitsuList: Dodoitsu[] = dodoitsuListMock.slice(
+    0,
+    query.limit ? query.limit : 10
+  );
   const count: number = 101;
   return { dodoitsuList, count };
 };
@@ -44,7 +47,10 @@ export const getPopularDodoitsuList = async (
   //     .catch((error) => {
   //       throw new Error(error);
   //     });
-  const dodoitsuList: Dodoitsu[] = dodoitsuListMock.splice(0, query.limit);
+  const dodoitsuList: Dodoitsu[] = dodoitsuListMock.slice(
+    0,
+    query.limit ? query.limit : 10
+  );
   const count: number = 101;
   return { dodoitsuList, count };
 };

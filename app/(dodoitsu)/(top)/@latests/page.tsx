@@ -1,6 +1,6 @@
 import { getLatestDodoitsuList } from "@/src/server/dodoitsu/getDodoitsuList";
-
-import { Card } from "@/app/_components/Card";
+import { LinkButton } from "@components/LinkButton/LinkButton";
+import { DodoitsuList } from "./_components/DodoitsuList";
 
 // 一ページ当たりに表示する都々逸の件数
 const ITEMS_PER_PAGE = 5;
@@ -12,36 +12,11 @@ export default async function TopLatests() {
   });
 
   return (
-    <div id="infinite-animation" className="w-full overflow-hidden">
-      <div className="flex">
-        {["0", "60"].map((delay) => {
-          return (
-            <div
-              key={delay}
-              className={`flex animate-xScroll lg:animate-xScroll-lg delay-${delay}s`}
-            >
-              <div className="w-full flex">
-                {[0, 1, 2, 3, 4].map((index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="mr-5 min-w-[600px] lg:min-w-[800px]"
-                    >
-                      <Card key={index}>
-                        <div className="m-5">
-                          <div className="text-md lg:text-xl font-bold font-noto-serif text-gray-900 dark:text-white">
-                            {dodoitsuList[index] && dodoitsuList[index].content}
-                          </div>
-                        </div>
-                      </Card>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })}
+    <div>
+      <div className="mb-3">
+        <DodoitsuList dodoitsuList={dodoitsuList} />
       </div>
+      <LinkButton text="もっと見る" href="/dodoitsu/latest?page=1" />
     </div>
   );
 }
