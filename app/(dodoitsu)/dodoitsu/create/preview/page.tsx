@@ -1,6 +1,4 @@
 "use client";
-import { useState } from "react";
-
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMutation } from "react-query";
 
@@ -14,8 +12,6 @@ const DodoitsuCreatePreview = () => {
   const searchParams = useSearchParams();
   const content = decodeURIComponent(searchParams.get("content") || "");
   const comment = decodeURIComponent(searchParams.get("comment") || "");
-
-  const [dodoitsuId, setDodoitsuId] = useState("");
 
   const dodoitsu: Dodoitsu = {
     id: "",
@@ -42,7 +38,6 @@ const DodoitsuCreatePreview = () => {
       },
       {
         onSuccess: (id) => {
-          setDodoitsuId(id);
           router.push(`/dodoitsu/detail/${id}`);
         },
         onError: () => {
