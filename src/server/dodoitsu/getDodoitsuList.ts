@@ -1,4 +1,4 @@
-import { useAxios } from "@/src/hooks/useAxios";
+// import { useAxios } from "@/src/hooks/useAxios";
 import { Dodoitsu } from "../../types/Dodoitsu";
 
 type GetDodoitsuListRequest = {
@@ -11,9 +11,9 @@ type GetDodoitsuListResponse = { dodoitsuList: Dodoitsu[]; count: number };
 export const getLatestDodoitsuList = async (
   query: GetDodoitsuListRequest
 ): Promise<GetDodoitsuListResponse> => {
-  const config = {
-    params: query,
-  };
+  //   const config = {
+  //     params: query,
+  //   };
 
   //   const dodoitsuList: Dodoitsu[] = await $axios
   //     .get(`/dodoitsu/latest`, config)
@@ -31,10 +31,10 @@ export const getLatestDodoitsuList = async (
 export const getPopularDodoitsuList = async (
   query: GetDodoitsuListRequest
 ): Promise<GetDodoitsuListResponse> => {
-  const $axios = useAxios();
-  const config = {
-    params: query,
-  };
+  //   const $axios = useAxios();
+  //   const config = {
+  //     params: query,
+  //   };
 
   //   const dodoitsuList: Dodoitsu[] = await $axios
   //     .get(`/dodoitsu/polular`, config)

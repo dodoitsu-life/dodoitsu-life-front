@@ -1,4 +1,4 @@
-import { useAxios } from "@/src/hooks/useAxios";
+// import { useAxios } from "@/src/hooks/useAxios";
 
 type CreateDodoitsuRequest = {
   content: string;
