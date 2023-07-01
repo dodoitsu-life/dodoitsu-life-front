@@ -16,7 +16,6 @@ export async function generateMetadata({ params }: { params: Params }) {
     title: `${dodoitsu.content} | 都々逸ライフ`,
     description: dodoitsu.description,
     url: `${url}/dodoitsu/detail/${dodoitsu.id}`,
-    imageUrl: `${url}/api/og?title=${dodoitsu.content}`,
   });
 }
 
