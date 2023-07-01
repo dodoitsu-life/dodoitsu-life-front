@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export const runtime = "edge";
 
 const font = fetch(
-  new URL("../../../assets/font/yumindb-subset.woff", import.meta.url)
+  new URL("../../../assets/font/NotoSerifJP.otf", import.meta.url)
 ).then((res) => res.arrayBuffer());
 
 export async function GET(req: NextRequest) {
@@ -32,7 +32,7 @@ export async function GET(req: NextRequest) {
         height: 600,
         fonts: [
           {
-            name: "HannariMincho-Regular",
+            name: "NotoSerifJP",
             data: fontData,
           },
         ],
