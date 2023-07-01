@@ -12,7 +12,7 @@ const DodoitsuCreate = () => {
   const toPreview = (data: CreateFormTypes) => {
     const keys = {
       content: encodeURIComponent(data.content),
-      comment: encodeURIComponent(data.comment || ""),
+      description: encodeURIComponent(data.description || ""),
     };
     router.push(`/dodoitsu/create/preview?${stringify(keys)}`);
   };

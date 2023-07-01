@@ -5,6 +5,6 @@ export type Props = {
   isLoading?: boolean;
   clickable?: boolean;
   displayContent?: boolean;
-  displayComment?: boolean;
+  displayDiscrition?: boolean;
   displayFooter?: boolean;
 };
