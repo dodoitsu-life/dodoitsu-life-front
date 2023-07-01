@@ -1,5 +1,6 @@
-import { useAxios } from "@/src/hooks/useAxios";
+import axios from "axios";
 import { Dodoitsu } from "../../types/Dodoitsu";
+import { appConfig } from "@/src/config/app.config";
 
 type GetDodoitsuListRequest = {
   page: number;
@@ -11,14 +12,15 @@ type GetDodoitsuListResponse = { dodoitsuList: Dodoitsu[]; count: number };
 export const getLatestDodoitsuList = async (
   query: GetDodoitsuListRequest
 ): Promise<GetDodoitsuListResponse> => {
-  const $axios = useAxios();
+  const { api } = appConfig();
+
   const config = {
     params: query,
   };
 
   const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
-    await $axios
-      .get(`/dodoitsu/latest`, config)
+    await axios
+      .get(`${api.baseUrl}/dodoitsu/latest`, config)
       .then((response) => {
         return response.data;
       })
@@ -32,14 +34,14 @@ export const getLatestDodoitsuList = async (
 export const getPopularDodoitsuList = async (
   query: GetDodoitsuListRequest
 ): Promise<GetDodoitsuListResponse> => {
-  const $axios = useAxios();
+  const { api } = appConfig();
   const config = {
     params: query,
   };
 
   const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
-    await $axios
-      .get(`/dodoitsu/popular`, config)
+    await axios
+      .get(`${api.baseUrl}/dodoitsu/popular`, config)
       .then((response) => {
         return response.data;
       })
