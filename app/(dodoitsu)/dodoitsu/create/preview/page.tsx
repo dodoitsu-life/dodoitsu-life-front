@@ -11,13 +11,13 @@ const DodoitsuCreatePreview = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const content = decodeURIComponent(searchParams.get("content") || "");
-  const comment = decodeURIComponent(searchParams.get("comment") || "");
+  const description = decodeURIComponent(searchParams.get("description") || "");
 
   const dodoitsu: Dodoitsu = {
     id: "",
     content,
-    comment,
-    posted_at: new Date(),
+    description,
+    createdAt: new Date(),
   };
 
   const { mutate: postDodoitsu, isLoading: isPostDodoitsuLoading } =
@@ -30,7 +30,7 @@ const DodoitsuCreatePreview = () => {
           },
           body: JSON.stringify({
             content,
-            comment,
+            description,
           }),
         });
         const { id } = await res.json();

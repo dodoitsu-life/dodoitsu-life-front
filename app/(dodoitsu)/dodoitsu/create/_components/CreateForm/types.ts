@@ -1,6 +1,6 @@
 export type CreateFormTypes = {
   content: string;
-  comment?: string;
+  description?: string;
 };
 
 export type Props = {

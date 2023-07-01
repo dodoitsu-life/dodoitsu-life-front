@@ -1,8 +1,8 @@
 export interface Dodoitsu {
   id: string;
   content: string;
-  comment?: string;
+  description?: string;
   author?: string;
   autherTwitterId?: string;
-  posted_at: Date;
+  createdAt: Date;
 }

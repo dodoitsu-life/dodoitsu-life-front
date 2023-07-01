@@ -3,8 +3,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Props, CreateFormTypes } from "./types";
 import {
-  COMMENT_MAX_LENGTH,
-  COMMENT_MAX_LENGTH_MESSAGE,
+  DESCRIPTION_MAX_LENGTH,
+  DESCRIPTION_MAX_LENGTH_MESSAGE,
   CONTENT_MAX_LENGTH,
   CONTENT_MAX_LENGTH_MESSAGE,
   CONTENT_REQUIRED_MESSAGE,
@@ -72,20 +72,20 @@ export const CreateForm = (props: Props) => {
           </div>
           <div className="md:w-4/5">
             <textarea
-              id="comment"
+              id="description"
               placeholder="作者コメントを入力してください（任意）"
               rows={5}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              {...register("comment", {
+              {...register("description", {
                 maxLength: {
-                  value: COMMENT_MAX_LENGTH,
-                  message: COMMENT_MAX_LENGTH_MESSAGE,
+                  value: DESCRIPTION_MAX_LENGTH,
+                  message: DESCRIPTION_MAX_LENGTH_MESSAGE,
                 },
               })}
             />
-            {errors.comment && (
+            {errors.description && (
               <span className="text-red-500 text-sm px-4">
-                {errors.comment.message}
+                {errors.description.message}
               </span>
             )}
           </div>

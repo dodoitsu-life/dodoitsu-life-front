@@ -9,7 +9,7 @@ export const DodoitsuList = ({ dodoitsuList, isLoading }: Props) => {
         <div className="mt-10">
           <DodoitsuCard
             isLoading={true}
-            displayComment={false}
+            displayDiscrition={false}
             displayFooter={false}
           />
         </div>
@@ -33,7 +33,7 @@ export const DodoitsuList = ({ dodoitsuList, isLoading }: Props) => {
             <DodoitsuCard
               clickable
               dodoitsu={dodoitsu}
-              displayComment={false}
+              displayDiscrition={false}
               displayFooter={false}
             />
           </Link>

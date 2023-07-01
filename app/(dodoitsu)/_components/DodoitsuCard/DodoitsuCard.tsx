@@ -8,7 +8,7 @@ export const DodoitsuCard = ({
   isLoading = false,
   clickable = false,
   displayContent = true,
-  displayComment = true,
+  displayDiscrition = true,
   displayFooter = true,
 }: Props) => {
   const Loading = () => {
@@ -19,7 +19,7 @@ export const DodoitsuCard = ({
             <div className="bg-gray-200 my-6 h-8 w-auto animate-pulse" />
           )}
 
-          {displayComment && (
+          {displayDiscrition && (
             <div className="py-6 border-t border-gray-300 flex flex-col gap-3 animate-pulse">
               <div className="bg-gray-200 h-5 w-full" />
               <div className="bg-gray-200 h-5 w-full" />
@@ -58,9 +58,9 @@ export const DodoitsuCard = ({
           </div>
         )}
 
-        {dodoitsu.comment && displayComment && (
+        {dodoitsu.description && displayDiscrition && (
           <div className="text-md lg:text-lg border-t border-gray-300 py-5 font-bold font-noto-serif text-gray-900 dark:text-white whitespace-pre-wrap">
-            {dodoitsu.comment}
+            {dodoitsu.description}
           </div>
         )}
 
