@@ -1,4 +1,5 @@
 import axios from "axios";
+import { cache } from "react";
 import { Dodoitsu } from "../../types/Dodoitsu";
 import { appConfig } from "@/src/config/app.config";
 
@@ -9,47 +10,47 @@ type GetDodoitsuListRequest = {
 
 type GetDodoitsuListResponse = { dodoitsuList: Dodoitsu[]; count: number };
 
-export const getLatestDodoitsuList = async (
-  query: GetDodoitsuListRequest
-): Promise<GetDodoitsuListResponse> => {
-  const { api } = appConfig();
+export const getLatestDodoitsuList = cache(
+  async (query: GetDodoitsuListRequest): Promise<GetDodoitsuListResponse> => {
+    const { api } = appConfig();
 
-  const config = {
-    params: query,
-  };
+    const config = {
+      params: query,
+    };
 
-  const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
-    await axios
-      .get(`${api.baseUrl}/dodoitsu/latest`, config)
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        throw new Error(error);
-      });
+    const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
+      await axios
+        .get(`${api.baseUrl}/dodoitsu/latest`, config)
+        .then((response) => {
+          return response.data;
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
 
-  return { dodoitsuList, count };
-};
+    return { dodoitsuList, count };
+  }
+);
 
-export const getPopularDodoitsuList = async (
-  query: GetDodoitsuListRequest
-): Promise<GetDodoitsuListResponse> => {
-  const { api } = appConfig();
-  const config = {
-    params: query,
-  };
+export const getPopularDodoitsuList = cache(
+  async (query: GetDodoitsuListRequest): Promise<GetDodoitsuListResponse> => {
+    const { api } = appConfig();
+    const config = {
+      params: query,
+    };
 
-  const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
-    await axios
-      .get(`${api.baseUrl}/dodoitsu/popular`, config)
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        throw new Error(error);
-      });
-  return { dodoitsuList, count };
-};
+    const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
+      await axios
+        .get(`${api.baseUrl}/dodoitsu/popular`, config)
+        .then((response) => {
+          return response.data;
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+    return { dodoitsuList, count };
+  }
+);
 
 // const dodoitsuListMock: Dodoitsu[] = [
 //   {

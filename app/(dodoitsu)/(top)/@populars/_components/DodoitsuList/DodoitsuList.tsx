@@ -13,7 +13,7 @@ export const DodoitsuList = ({ dodoitsuList, loading = false }: Props) => {
         <div className={wrapperClass}>
           <Card>
             <div className="m-5 flex">
-              <div className="bg-gray-200 my-6 h-6 w-auto animate-pulse"></div>
+              <div className="bg-gray-200 h-6 w-auto animate-pulse"></div>
             </div>
           </Card>
         </div>
