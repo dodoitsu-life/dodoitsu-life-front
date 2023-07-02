@@ -4,5 +4,6 @@ export type CreateFormTypes = {
 };
 
 export type Props = {
+  restoreData: Partial<CreateFormTypes>;
   onSubmit: (values: CreateFormTypes) => void;
 };

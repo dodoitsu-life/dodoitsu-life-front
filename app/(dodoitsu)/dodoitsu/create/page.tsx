@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { Card } from "@components/Card";
 import { CreateForm, CreateFormTypes } from "./_components/CreateForm";
@@ -8,6 +8,14 @@ import { stringify } from "querystring";
 
 const DodoitsuCreate = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const content = decodeURIComponent(searchParams.get("content") || "");
+  const description = decodeURIComponent(searchParams.get("description") || "");
+  const restoreData = {
+    content,
+    description,
+  };
 
   const toPreview = (data: CreateFormTypes) => {
     const keys = {
@@ -33,7 +41,7 @@ const DodoitsuCreate = () => {
         <section id="contents">
           <Card>
             <div className="m-8">
-              <CreateForm onSubmit={toPreview} />
+              <CreateForm onSubmit={toPreview} restoreData={restoreData} />
             </div>
           </Card>
         </section>

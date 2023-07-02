@@ -1,6 +1,7 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMutation } from "react-query";
+import { ArrowLongLeftIcon } from "@heroicons/react/24/outline";
 
 import { Dodoitsu } from "@/src/types/Dodoitsu";
 import { Button } from "@components/Button";
@@ -50,6 +51,12 @@ const DodoitsuCreatePreview = () => {
     postDodoitsu();
   };
 
+  const handleEditDodoitsu = () => {
+    router.push(
+      `/dodoitsu/create?content=${content}&description=${description}`
+    );
+  };
+
   return (
     <main className="container mx-auto px-4 flex justify-center">
       <div className="w-full max-w-7xl mt-12">
@@ -68,6 +75,16 @@ const DodoitsuCreatePreview = () => {
                   プレビューを確認し、「この内容で都々逸を投稿する」ボタンを押してください
                 </p>
               </div>
+
+              <Button
+                className="mt-3"
+                variant="gray"
+                disabled={isPostDodoitsuLoading}
+                onClick={handleEditDodoitsu}
+              >
+                <ArrowLongLeftIcon className="w-4 h-4 mr-2" />
+                編集に戻る
+              </Button>
             </div>
           </Card>
         </section>
