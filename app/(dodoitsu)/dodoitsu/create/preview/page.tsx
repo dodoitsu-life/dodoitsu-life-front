@@ -1,4 +1,6 @@
 "use client";
+
+import { stringify } from "querystring";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMutation } from "react-query";
 import { ArrowLongLeftIcon } from "@heroicons/react/24/outline";
@@ -52,9 +54,11 @@ const DodoitsuCreatePreview = () => {
   };
 
   const handleEditDodoitsu = () => {
-    router.push(
-      `/dodoitsu/create?content=${content}&description=${description}`
-    );
+    const keys = {
+      content: encodeURIComponent(content),
+      description: encodeURIComponent(description || ""),
+    };
+    router.push(`/dodoitsu/create?${stringify(keys)}`);
   };
 
   return (
