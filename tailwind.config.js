@@ -21,11 +21,17 @@ module.exports = {
     extend: {
       colors: {
         primary: "#A377FF",
-        secondary: "#ACBCFF",
-        tertiary: "#AEE2FF",
-        quaternary: "#E6FFFD",
         "primary-light": "#B799FF",
         "primary-dark": "#9434E9",
+        secondary: "#ACBCFF",
+        "secondary-light": "#C4D2FF",
+        "secondary-dark": "#8A9CFF",
+        tertiary: "#AEE2FF",
+        "tertiary-light": "#C4E9FF",
+        "tertiary-dark": "#8ACDFF",
+        quaternary: "#E6FFFD",
+        "quaternary-light": "#F0FFFF",
+        "quaternary-dark": "#D0FFFF",
       },
       fontFamily: {
         "noto-serif": ["Noto Serif JP", "serif"],
