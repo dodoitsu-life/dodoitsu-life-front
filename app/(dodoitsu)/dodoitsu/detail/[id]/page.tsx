@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: Params }) {
   const { dodoitsu } = await getDodoitsuById({ id: params.id });
 
   // TODO: pathの動的な取得が現状できないので、一旦固定値を入れておく
-  const url = "https://dodoitsu.vercel.app";
+  const url = "https://dodoitsu-life.vercel.app";
 
   return seoGen({
     title: `${dodoitsu.content} | 都々逸ライフ`,
