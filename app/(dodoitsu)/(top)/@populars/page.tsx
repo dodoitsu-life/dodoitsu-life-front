@@ -31,7 +31,11 @@ const getDodoitsuList = cache(async (): Promise<DodoitsuListResponse> => {
 export default function TopPopulars() {
   const { data, isLoading, isError } = useQuery(
     "dodoitsuList",
-    getDodoitsuList
+    getDodoitsuList,
+    {
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
   );
 
   if (isLoading || !data) return <DodoitsuList loading />;

@@ -49,7 +49,7 @@ export const DodoitsuList = ({ dodoitsuList, loading = false }: Props) => {
                       <Link href={`/dodoitsu/detail/${dodoitsuList[index].id}`}>
                         <Card key={index} clickable>
                           <div className="m-5">
-                            <div className="h-5 text-md lg:text-xl font-bold font-noto-serif text-gray-900 dark:text-white">
+                            <div className="h-5 text-md lg:text-xl font-bold font-noto-serif text-gray-900 dark:text-gray-900">
                               {dodoitsuList[index].content}
                             </div>
                           </div>

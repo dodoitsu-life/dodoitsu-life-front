@@ -44,7 +44,8 @@ export default function TopLatests() {
       <div className="mb-3">
         <DodoitsuList
           dodoitsuList={
-            data.dodoitsuList && data.dodoitsuList.slice(0, data.count)
+            data.dodoitsuList &&
+            data.dodoitsuList.slice(0, data.count).reverse()
           }
         />
       </div>
