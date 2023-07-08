@@ -61,7 +61,7 @@ export const DodoitsuList = ({ dodoitsuList, loading = false }: Props) => {
                 <div className="m-5 flex">
                   {Icon}
                   <div
-                    className={`${textSize} font-bold font-noto-serif text-gray-900 dark:text-white`}
+                    className={`${textSize} font-bold font-noto-serif text-gray-900 dark:text-gray-900`}
                   >
                     {dodoitsu.content}
                   </div>

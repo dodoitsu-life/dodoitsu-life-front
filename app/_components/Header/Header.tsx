@@ -41,7 +41,7 @@ export const Header = () => {
       <nav
         role="navigation"
         aria-label="main navigation"
-        className="bg-primary-light flex"
+        className="bg-primary-light dark:bg-primary-dark flex"
       >
         <div
           id="navbar-brand"
