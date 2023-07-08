@@ -33,7 +33,7 @@ export const CreateForm = (props: Props) => {
 
     if (props.restoreData.description)
       setValue("description", props.restoreData.description);
-  }, [props.restoreData]);
+  }, [props.restoreData, setValue]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-5xl">
