@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export const runtime = "edge";
 
 const font = fetch(
-  new URL("../../../assets/font/IBMPlexSansJPSubset.woff", import.meta.url)
+  new URL("../../../assets/font/sans-jp.woff", import.meta.url)
 ).then((res) => res.arrayBuffer());
 
 export async function GET(req: NextRequest) {
@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
       height: 600,
       fonts: [
         {
-          name: "IBMPlexSansJPSubset",
+          name: "IBMPlexSansJP-Bold",
           data: fontData,
         },
       ],
