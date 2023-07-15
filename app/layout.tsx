@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { Metadata } from "next";
 
 import { Header } from "@components/Header/Header";
-import { Footer } from "@components/Footer/Footer";
+import { Footer, type Item as FooterItem } from "@components/Footer";
 import { JotaiProvider } from "@components/Providers/JotaiProvider/JotaiProvider";
 import { ReactQueryProvider } from "@components/Providers/ReactQueryProvider";
 
@@ -19,6 +19,17 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const footerItems: FooterItem[] = [
+    {
+      text: "利用規約",
+      to: "/terms",
+    },
+    {
+      text: "プライバシーポリシー",
+      to: "/privacy",
+    },
+  ];
+
   return (
     <html lang="jp">
       <body className={`${inter.className} flex flex-col h-screen`}>
@@ -28,7 +39,7 @@ export default function RootLayout({
             <div id="main-container" className="flex-grow">
               {children}
             </div>
-            <Footer />
+            <Footer items={footerItems} />
           </JotaiProvider>
         </ReactQueryProvider>
       </body>
