@@ -35,7 +35,13 @@ export default async function DodoitsuRanking({
 
         <DodoitsuList dodoitsuList={dodoitsuList} />
       </section>
-      <PaginationLink page={page} maxPage={maxPage} pageLinkGen={pageLinkGen} />
+      {maxPage > 1 && (
+        <PaginationLink
+          page={page}
+          maxPage={maxPage}
+          pageLinkGen={pageLinkGen}
+        />
+      )}
     </div>
   );
 }
