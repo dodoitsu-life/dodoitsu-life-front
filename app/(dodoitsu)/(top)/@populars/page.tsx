@@ -15,7 +15,7 @@ type DodoitsuListResponse = {
   count: number;
 };
 
-const getDodoitsuList = cache(async (): Promise<DodoitsuListResponse> => {
+const getDodoitsuList = async (): Promise<DodoitsuListResponse> => {
   const res = await fetch(
     `/api/dodoitsu/popular?page=1&limit=${ITEMS_PER_PAGE}`,
     {
@@ -26,11 +26,11 @@ const getDodoitsuList = cache(async (): Promise<DodoitsuListResponse> => {
   );
 
   return await res.json();
-});
+};
 
 export default function TopPopulars() {
   const { data, isLoading, isError } = useQuery(
-    "dodoitsuList",
+    "popularDodoitsuList",
     getDodoitsuList,
     {
       refetchOnWindowFocus: false,

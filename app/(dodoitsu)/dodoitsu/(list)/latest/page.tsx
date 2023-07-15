@@ -27,7 +27,7 @@ export default async function DodoitsuLatest({
   }
 
   return (
-    <div>
+    <div className="h-full flex flex-col justify-between">
       <section id="dodoitsu-list">
         <h1 className="mb-8 text-center lg:text-3xl text-lg font-bold text-gray-900 dark:text-white">
           最新の都々逸

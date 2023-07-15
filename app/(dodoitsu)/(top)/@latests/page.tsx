@@ -14,7 +14,7 @@ type DodoitsuListResponse = {
   count: number;
 };
 
-const getDodoitsuList = cache(async (): Promise<DodoitsuListResponse> => {
+const getDodoitsuList = async (): Promise<DodoitsuListResponse> => {
   const res = await fetch(
     `/api/dodoitsu/latest?page=1&limit=${ITEMS_PER_PAGE}`,
     {
@@ -24,11 +24,11 @@ const getDodoitsuList = cache(async (): Promise<DodoitsuListResponse> => {
     }
   );
   return await res.json();
-});
+};
 
 export default function TopLatests() {
   const { data, isLoading, isError } = useQuery(
-    "dodoitsuList",
+    "latestDodoitsuList",
     getDodoitsuList,
     {
       refetchOnWindowFocus: false,
@@ -42,12 +42,7 @@ export default function TopLatests() {
   return (
     <div>
       <div className="mb-3">
-        <DodoitsuList
-          dodoitsuList={
-            data.dodoitsuList &&
-            data.dodoitsuList.slice(0, data.count).reverse()
-          }
-        />
+        <DodoitsuList dodoitsuList={data.dodoitsuList} />
       </div>
       <LinkButton text="もっと見る" href="/dodoitsu/latest?page=1" />
     </div>

@@ -27,7 +27,7 @@ export default async function DodoitsuRanking({
   }
 
   return (
-    <div>
+    <div className="h-full flex flex-col justify-between">
       <section id="dodoitsu-list">
         <h1 className="mb-8 text-center lg:text-3xl text-lg font-bold text-gray-900 dark:text-white">
           人気の都々逸
