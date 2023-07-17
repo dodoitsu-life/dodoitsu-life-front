@@ -24,6 +24,7 @@
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
     "jotai": "^2.1.0",
+    "js-cookie": "^3.0.5",
     "next": "13.4.3",
     "postcss": "8.4.23",
     "querystring": "^0.2.1",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
+    "@types/js-cookie": "^3.0.3",
     "daisyui": "^3.0.3"
   }
 }
