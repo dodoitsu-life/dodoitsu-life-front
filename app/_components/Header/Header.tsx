@@ -1,34 +1,20 @@
 "use client";
-import { Menu } from "./types";
 import { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
   BookOpenIcon,
-  ClipboardIcon,
-  TrophyIcon,
-  // ArrowRightOnRectangleIcon,
+  ArrowRightOnRectangleIcon,
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { Props } from "./types";
 
-export const Header = () => {
+export const Header = ({ menus, handleLogin }: Props) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const menu = [
-    {
-      name: "最新の投稿",
-      icon: ClipboardIcon,
-      link: "/dodoitsu/latest?page=1",
-    },
-    {
-      name: "ランキング",
-      icon: TrophyIcon,
-      link: "/dodoitsu/ranking?page=1",
-    },
-  ] satisfies Menu[];
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -59,26 +45,26 @@ export const Header = () => {
           className="hidden lg:flex items-stretch justify-between flex-grow flex-shrink-0"
         >
           <div id="navbar-default-start" className="flex">
-            {menu.map((item, index) => {
-              const Icon = item.icon;
+            {menus.map((menu, index) => {
+              const Icon = menu.icon;
               return (
-                <Link key={index} href={item.link}>
+                <Link key={index} href={menu.link}>
                   <div className="hover:bg-primary h-full text-xl flex items-center font-noto-serif p-1 pr-2 text-white">
                     <Icon className="w-9 h-6" />
-                    {item.name}
+                    {menu.name}
                   </div>
                 </Link>
               );
             })}
           </div>
-          {/* <div id="navbar-default-end" className="flex">
-            <Link href="/login">
+          <div id="navbar-default-end" className="flex">
+            {/* <button onClick={() => handleLogin()}>
               <div className="hover:bg-primary h-full text-xl flex items-center font-noto-serif p-1 pr-2 text-white">
                 <ArrowRightOnRectangleIcon className="w-9 h-6" />
                 ログイン
               </div>
-            </Link>
-          </div> */}
+            </button> */}
+          </div>
         </div>
         <div
           id="navbar-lg"
@@ -112,23 +98,23 @@ export const Header = () => {
               <div className="mt-3 flow-root">
                 <div className="-my-6 divide-y divide-gray-500/10">
                   <div className="py-6">
-                    {menu.map((item, index) => {
-                      const Icon = item.icon;
+                    {menus.map((menu, index) => {
+                      const Icon = menu.icon;
                       return (
-                        <Link key={index} href={item.link}>
+                        <Link key={index} href={menu.link}>
                           <div className="hover:bg-gray-50 h-full text-2xl flex items-center m-4 font-noto-serif text-gray-900">
                             <Icon className="w-6 h-6 mr-3" />
-                            {item.name}
+                            {menu.name}
                           </div>
                         </Link>
                       );
                     })}
-                    {/* <Link href="/login">
+                    {/* <button onClick={() => handleLogin()}>
                       <div className="hover:bg-gray-50 h-full text-2xl flex items-center m-4 font-noto-serif text-gray-900  ring-gray-200">
                         <ArrowRightOnRectangleIcon className="w-6 h-6 mr-3" />
                         ログイン
                       </div>
-                    </Link> */}
+                    </button> */}
                   </div>
                 </div>
               </div>

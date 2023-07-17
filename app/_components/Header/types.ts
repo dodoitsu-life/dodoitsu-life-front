@@ -8,3 +8,8 @@ export type Menu = {
   >;
   link: string;
 };
+
+export type Props = {
+  handleLogin: () => void;
+  menus: Menu[];
+};
