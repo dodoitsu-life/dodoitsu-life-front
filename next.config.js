@@ -3,6 +3,9 @@ const nextConfig = {
   experimental: {
     mdxRs: true,
   },
+  images: {
+    domains: ["pbs.twimg.com"],
+  },
   reactStrictMode: true,
 };
 
