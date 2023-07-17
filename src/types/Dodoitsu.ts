@@ -3,6 +3,5 @@ export interface Dodoitsu {
   content: string;
   description?: string;
   author?: string;
-  autherTwitterId?: string;
   createdAt: Date;
 }
