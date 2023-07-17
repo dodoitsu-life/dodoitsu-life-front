@@ -1,9 +1,6 @@
 import { NextRequest } from "next/server";
 import { ImageResponse } from "@vercel/og";
 
-// 動的レンダリングを強制する
-export const dynamic = "force-dynamic";
-
 export const runtime = "edge";
 
 const font = fetch(
