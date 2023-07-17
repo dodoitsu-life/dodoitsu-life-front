@@ -45,8 +45,8 @@ export const DodoitsuCard = ({
     hashtags: ["都々逸ライフ", "都々逸"],
     // TODO: pathの動的な取得が現状できないので、一旦固定値を入れておく
     url: `https://dodoitsu-life.vercel.app/dodoitsu/detail/${dodoitsu.id}`,
-    via: dodoitsu.autherTwitterId,
-    related: ["FAL_coffee"],
+    // via: dodoitsu.autherTwitterId,
+    related: ["fal_engineer"],
   });
 
   return (
