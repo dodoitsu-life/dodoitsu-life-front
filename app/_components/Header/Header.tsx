@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
   BookOpenIcon,
-  ArrowRightOnRectangleIcon,
+  // ArrowRightOnRectangleIcon,
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";

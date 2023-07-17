@@ -21,7 +21,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const headerMenus: HeaderMenu[] = [
+  const headerMenus = (): HeaderMenu[] => [
     {
       name: "最新の投稿",
       icon: ClipboardIcon,
@@ -51,7 +51,7 @@ export default function RootLayout({
         <ReactQueryProvider>
           <JotaiProvider>
             <AuthProvider>
-              <Header menus={headerMenus} />
+              <Header menus={headerMenus()} />
               <div id="main-container" className="flex-grow">
                 {children}
               </div>
