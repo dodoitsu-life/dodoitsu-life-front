@@ -11,7 +11,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Props } from "./types";
 
-export const Header = ({ menus, handleLogin }: Props) => {
+export const Header = ({ menus }: Props) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 

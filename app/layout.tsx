@@ -1,5 +1,3 @@
-"use client";
-
 import "./globals.css";
 import { useContext } from "react";
 import { Inter } from "next/font/google";
@@ -53,17 +51,13 @@ export default function RootLayout({
     },
   ];
 
-  const handleLogin = () => {
-    window.location.href = "/api/auth/login";
-  };
-
   return (
     <html lang="jp">
       <body className={`${inter.className} flex flex-col h-screen`}>
         <ReactQueryProvider>
           <JotaiProvider>
             <AuthProvider>
-              <Header menus={headerMenus} handleLogin={handleLogin} />
+              <Header menus={headerMenus} />
               <div id="main-container" className="flex-grow">
                 {children}
               </div>

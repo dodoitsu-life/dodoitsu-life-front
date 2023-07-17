@@ -10,6 +10,5 @@ export type Menu = {
 };
 
 export type Props = {
-  handleLogin: () => void;
   menus: Menu[];
 };
