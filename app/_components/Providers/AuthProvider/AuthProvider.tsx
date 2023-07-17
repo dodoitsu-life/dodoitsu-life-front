@@ -1,3 +1,5 @@
+"use client";
+
 import React, { createContext, useState, useEffect } from "react";
 import { User } from "@/src/types/User";
 import { AuthContextType } from "./types";
