@@ -8,7 +8,3 @@ export type Menu = {
   >;
   link: string;
 };
-
-export type Props = {
-  menus: Menu[];
-};

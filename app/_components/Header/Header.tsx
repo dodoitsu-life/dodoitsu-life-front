@@ -8,10 +8,12 @@ import {
   // ArrowRightOnRectangleIcon,
   Bars3Icon,
   XMarkIcon,
+  ClipboardIcon,
+  TrophyIcon,
 } from "@heroicons/react/24/outline";
-import { Props } from "./types";
+import { Menu } from "./types";
 
-export const Header = ({ menus }: Props) => {
+export const Header = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -21,6 +23,19 @@ export const Header = ({ menus }: Props) => {
     const closeMobileMenu = () => setMobileMenuOpen(false);
     closeMobileMenu();
   }, [pathname, searchParams]);
+
+  const menus: Menu[] = [
+    {
+      name: "最新の投稿",
+      icon: ClipboardIcon,
+      link: "/dodoitsu/latest?page=1",
+    },
+    {
+      name: "ランキング",
+      icon: TrophyIcon,
+      link: "/dodoitsu/ranking?page=1",
+    },
+  ];
 
   return (
     <header>
