@@ -3,7 +3,7 @@ import { cache } from "react";
 import { User } from "../../types/User";
 import { appConfig } from "@/src/config/app.config";
 
-type GetMeRequest = { headers: { cookie: string } };
+type GetMeRequest = { headers: { Authorization: string } };
 type GetMeResponse = { user: User } | null;
 
 export const getMe = cache(
@@ -12,10 +12,16 @@ export const getMe = cache(
     const { data: user }: { data: User } = await axios
       .get(`${api.baseUrl}/auth/me`, { headers })
       .then((response) => {
-        return response.data;
+        const data = response.data;
+        if (data.code === 200) {
+          return data;
+        } else if (data.code === 401) {
+          throw { code: 401 };
+        }
       })
       .catch((error) => {
-        throw new Error(error);
+        if (error.code === 401) throw { code: 401 };
+        throw error;
       });
 
     return { user };
