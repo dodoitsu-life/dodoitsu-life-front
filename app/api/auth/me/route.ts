@@ -1,14 +1,20 @@
-import axios from "axios";
-import { cache } from "react";
-import { appConfig } from "@/src/config/app.config";
+import { NextRequest, NextResponse } from "next/server";
+import { getMe } from "@/src/server/auth/me";
+import { tokenRefresh } from "@/src/server/auth/tokenRefresh";
 
-type GetLogoutRequest = { body: { refreshToken: string } };
-
-export const logout = cache(
-  async ({ body }: GetLogoutRequest): Promise<void> => {
-    const { api } = appConfig();
-    await axios.post(`${api.baseUrl}/auth/logout`, { body }).catch((error) => {
-      throw new Error(error);
-    });
-  }
-);
+export async function GET(req: NextRequest) {
+  const cookie = req.headers.get("cookie") || "";
+  const authToken = (cookie.match(/auth_token=([^;]+)/) || [])[1];
+  const headers = {
+    Authorization: `Bearer ${authToken}`,
+    ...req.headers,
+  };
+  const me = await getMe({ headers }).catch(async (error) => {
+    if (error.code === 401) {
+      const refreshToken = (cookie.match(/refresh_token=([^;]+)/) || [])[1];
+      await tokenRefresh({ body: { refreshToken } });
+      return await getMe({ headers });
+    }
+  });
+  return NextResponse.json(me);
+}
