@@ -33,11 +33,11 @@ export default function Page() {
   useQuery("me", getMe, {
     onSuccess: (data) => {
       logIn(data);
-      router.push("/health");
+      router.push("/");
     },
     onError: (error: Error) => {
       alert(error.message);
-      router.push("/health");
+      router.push("/");
     },
   });
 
