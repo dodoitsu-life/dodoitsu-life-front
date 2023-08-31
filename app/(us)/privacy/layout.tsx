@@ -1,5 +1,3 @@
-"use client";
-
 import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "都々逸ライフ｜プライバシーポリシー",
