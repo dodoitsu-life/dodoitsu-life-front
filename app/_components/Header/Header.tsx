@@ -1,28 +1,28 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
   BookOpenIcon,
-  // ArrowRightOnRectangleIcon,
+  ArrowRightOnRectangleIcon,
+  HomeIcon,
   Bars3Icon,
   XMarkIcon,
   ClipboardIcon,
   TrophyIcon,
 } from "@heroicons/react/24/outline";
+import { useContext } from "react";
+import { DropdownMenu, DropdownMenuItem } from "@/app/_components/DropdownMenu";
+import { AuthContext } from "@/app/_components/Providers/AuthProvider";
 import { Menu } from "./types";
 
 export const Header = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
+  const { user, logOut } = useContext(AuthContext);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-
-  useEffect(() => {
-    const closeMobileMenu = () => setMobileMenuOpen(false);
-    closeMobileMenu();
-  }, [pathname, searchParams]);
 
   const menus: Menu[] = [
     {
@@ -36,6 +36,32 @@ export const Header = () => {
       link: "/dodoitsu/ranking?page=1",
     },
   ];
+
+  const loginMenu: Menu = {
+    name: "ログイン",
+    icon: ArrowRightOnRectangleIcon,
+    link: "/auth/login",
+  };
+
+  const myPageUrl = `/mypage`;
+
+  const userMenus: DropdownMenuItem[] = [
+    {
+      text: "マイページ",
+      href: myPageUrl,
+      icon: HomeIcon,
+    },
+    {
+      text: "ログアウト",
+      icon: ArrowRightOnRectangleIcon,
+      onClick: () => logOut(),
+    },
+  ];
+
+  useEffect(() => {
+    const closeMobileMenu = () => setMobileMenuOpen(false);
+    closeMobileMenu();
+  }, [pathname, searchParams]);
 
   return (
     <header>
@@ -73,12 +99,26 @@ export const Header = () => {
             })}
           </div>
           <div id="navbar-default-end" className="flex">
-            {/* <button onClick={() => handleLogin()}>
-              <div className="hover:bg-primary h-full text-xl flex items-center font-noto-serif p-1 pr-2 text-white">
-                <ArrowRightOnRectangleIcon className="w-9 h-6" />
-                ログイン
-              </div>
-            </button> */}
+            {user ? (
+              <DropdownMenu menus={userMenus}>
+                <div className="flex h-full items-center pr-3">
+                  <Image
+                    src={user.photo}
+                    width={50}
+                    height={50}
+                    alt="user photo"
+                    className="rounded-full"
+                  />
+                </div>
+              </DropdownMenu>
+            ) : (
+              <Link href={loginMenu.link}>
+                <div className="hover:bg-primary h-full text-xl flex items-center font-noto-serif p-1 pr-2 text-white">
+                  {<loginMenu.icon className="w-9 h-6" />}
+                  {loginMenu.name}
+                </div>
+              </Link>
+            )}
           </div>
         </div>
         <div
@@ -110,26 +150,48 @@ export const Header = () => {
                   <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
               </div>
-              <div className="mt-3 flow-root">
-                <div className="-my-6 divide-y divide-gray-500/10">
-                  <div className="py-6">
+              <div className="h-full flow-root">
+                <div className="h-full -my-6 divide-y divide-gray-500/10">
+                  <div className="h-full flex flex-col py-6">
                     {menus.map((menu, index) => {
                       const Icon = menu.icon;
                       return (
                         <Link key={index} href={menu.link}>
-                          <div className="hover:bg-gray-50 h-full text-2xl flex items-center m-4 font-noto-serif text-gray-900">
+                          <div className="hover:bg-gray-50 text-2xl flex flex-none items-center p-4 font-noto-serif text-gray-900">
                             <Icon className="w-6 h-6 mr-3" />
                             {menu.name}
                           </div>
                         </Link>
                       );
                     })}
-                    {/* <button onClick={() => handleLogin()}>
-                      <div className="hover:bg-gray-50 h-full text-2xl flex items-center m-4 font-noto-serif text-gray-900  ring-gray-200">
-                        <ArrowRightOnRectangleIcon className="w-6 h-6 mr-3" />
-                        ログイン
+                    {user ? (
+                      <div className="grow flex flex-col justify-between">
+                        <Link
+                          href={myPageUrl}
+                          className="hover:bg-gray-50 text-2xl flex items-center p-4 font-noto-serif text-gray-900"
+                        >
+                          <Image
+                            src={user.photo}
+                            width={30}
+                            height={30}
+                            alt="user photo"
+                            className="rounded-full"
+                          />
+                          <div className="ml-3">マイページへ</div>
+                        </Link>
+                        <button className="hover:bg-gray-50 text-2xl flex items-center p-4 font-noto-serif text-gray-900">
+                          <ArrowRightOnRectangleIcon className="w-6 h-6 mr-3" />
+                          <div className="ml-3">ログアウト</div>
+                        </button>
                       </div>
-                    </button> */}
+                    ) : (
+                      <Link href={loginMenu.link}>
+                        <div className="hover:bg-gray-50 text-2xl flex items-center p-4 font-noto-serif text-gray-900 ring-gray-200">
+                          {<loginMenu.icon className="w-6 h-6 mr-3" />}
+                          {loginMenu.name}
+                        </div>
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
