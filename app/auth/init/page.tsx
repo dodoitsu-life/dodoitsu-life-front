@@ -41,5 +41,5 @@ export default function Page() {
     },
   });
 
-  return <div></div>;
+  return <div>しばらくお待ちください</div>;
 }
