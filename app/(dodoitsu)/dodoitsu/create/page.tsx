@@ -38,7 +38,7 @@ const DodoitsuCreate = () => {
           </Card>
         </section>
 
-        <section id="contents">
+        <section id="contents" className="mb-20">
           <Card>
             <div className="m-8">
               <CreateForm onSubmit={toPreview} restoreData={restoreData} />

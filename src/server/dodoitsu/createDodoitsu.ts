@@ -9,13 +9,19 @@ type CreateDodoitsuRequest = {
 
 type CreateDodoitsuResponse = { id: string };
 
-export const createDodoitsu = async (
-  params: CreateDodoitsuRequest
-): Promise<CreateDodoitsuResponse> => {
+export const createDodoitsu = async ({
+  headers,
+  body,
+}: {
+  headers: {
+    Authorization: string;
+  };
+  body: CreateDodoitsuRequest;
+}): Promise<CreateDodoitsuResponse> => {
   const { api } = appConfig();
 
   const { data: dodoitsu }: { data: Dodoitsu } = await axios
-    .post(`${api.baseUrl}/dodoitsu`, params)
+    .post(`${api.baseUrl}/dodoitsu`, body, { headers })
     .then((response) => {
       return response.data;
     })
