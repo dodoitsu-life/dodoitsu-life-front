@@ -1,5 +1,5 @@
 "use client";
-
+import Cookies from "js-cookie";
 import React, { createContext, useState, useEffect } from "react";
 import { User } from "@/src/types/User";
 import { AuthContextType } from "./types";
@@ -27,6 +27,9 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       credentials: "include",
     });
     await localStorage.removeItem("user");
+
+    Cookies.remove("auth_token");
+    Cookies.remove("refresh_token");
     setUser(null);
   };
 

@@ -179,7 +179,10 @@ export const Header = () => {
                           />
                           <div className="ml-3">マイページへ</div>
                         </Link>
-                        <button className="hover:bg-gray-50 text-2xl flex items-center p-4 font-noto-serif text-gray-900">
+                        <button
+                          className="hover:bg-gray-50 text-2xl flex items-center p-4 font-noto-serif text-gray-900"
+                          onClick={() => logOut()}
+                        >
                           <ArrowRightOnRectangleIcon className="w-6 h-6 mr-3" />
                           <div className="ml-3">ログアウト</div>
                         </button>
