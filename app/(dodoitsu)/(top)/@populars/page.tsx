@@ -43,7 +43,9 @@ export default function TopPopulars() {
 
   return (
     <div>
-      <DodoitsuList dodoitsuList={data.dodoitsuList?.slice(0, data.count)} />
+      <div className="mb-3">
+        <DodoitsuList dodoitsuList={data.dodoitsuList?.slice(0, data.count)} />
+      </div>
       <LinkButton text="もっと見る" href="/dodoitsu/ranking?page=1" />
     </div>
   );
