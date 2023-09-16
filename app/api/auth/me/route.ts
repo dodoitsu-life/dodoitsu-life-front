@@ -11,13 +11,16 @@ export async function GET(req: NextRequest) {
     ...req.headers,
   };
 
-  const me = await getMe({ headers }).catch(async (error) => {
-    if (error.code === 401) {
-      const refreshToken = (cookie.match(/refresh_token=([^;]+)/) || [])[1];
-      await tokenRefresh({ body: { refreshToken } });
-      return await getMe({ headers });
-    }
-    return NextResponse.error();
-  });
-  return NextResponse.json(me);
+  return await getMe({ headers })
+    .catch(async (error) => {
+      if (error.code === 401) {
+        const refreshToken = (cookie.match(/refresh_token=([^;]+)/) || [])[1];
+        await tokenRefresh({ body: { refreshToken } });
+        return await getMe({ headers });
+      }
+      return NextResponse.error();
+    })
+    .then((me) => {
+      return NextResponse.json(me);
+    });
 }

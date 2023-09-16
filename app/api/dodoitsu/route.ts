@@ -18,6 +18,11 @@ export async function POST(req: NextRequest) {
   };
 
   const body = await req.json();
-  const { id } = await createDodoitsu({ headers, body });
-  return NextResponse.json({ id });
+  return await createDodoitsu({ headers, body })
+    .then((id) => {
+      return NextResponse.json({ id });
+    })
+    .catch(() => {
+      return NextResponse.error();
+    });
 }
