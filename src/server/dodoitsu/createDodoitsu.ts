@@ -1,6 +1,5 @@
-import axios from "axios";
+import $axios from "@/src/lib/axios";
 import { Dodoitsu } from "@/src/types/Dodoitsu";
-import { appConfig } from "@/src/config/app.config";
 
 type CreateDodoitsuRequest = {
   content: string;
@@ -10,23 +9,14 @@ type CreateDodoitsuRequest = {
 type CreateDodoitsuResponse = { id: string };
 
 export const createDodoitsu = async ({
-  headers,
   body,
 }: {
-  headers: {
-    Authorization: string;
-  };
   body: CreateDodoitsuRequest;
 }): Promise<CreateDodoitsuResponse> => {
-  const { api } = appConfig();
-
-  const { data: dodoitsu }: { data: Dodoitsu } = await axios
-    .post(`${api.baseUrl}/dodoitsu`, body, { headers })
+  const { data: dodoitsu }: { data: Dodoitsu } = await $axios
+    .post("/dodoitsu", body)
     .then((response) => {
       return response.data;
-    })
-    .catch((error) => {
-      throw new Error(error);
     });
   return { id: dodoitsu.id };
 };
