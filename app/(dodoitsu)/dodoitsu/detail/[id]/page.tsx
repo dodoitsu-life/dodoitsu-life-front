@@ -7,7 +7,7 @@ type Params = {
 };
 
 export async function generateMetadata({ params }: { params: Params }) {
-  await getDodoitsuById({ id: params.id }).then((res) => {
+  return await getDodoitsuById({ id: params.id }).then((res) => {
     const dodoitsu = res.dodoitsu;
     // TODO: pathの動的な取得が現状できないので、一旦固定値を入れておく
     const url = "https://dodoitsu-life.vercel.app";
