@@ -11,6 +11,9 @@ export async function GET(req: NextRequest) {
   const { dodoitsuList } = await getPopularDodoitsuList({
     page: 1,
     limit: limit ? Number(limit) : 3,
+  }).catch(() => {
+    return { dodoitsuList: [] };
   });
+
   return NextResponse.json({ dodoitsuList, count: dodoitsuList.length });
 }
