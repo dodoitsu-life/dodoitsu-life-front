@@ -1,4 +1,11 @@
+"use client";
+
 import { Props } from "./types";
+import { useState, useContext } from "react";
+import { useMutation } from "react-query";
+import { HeartIcon as SolidHeartIcon } from "@heroicons/react/24/solid";
+
+import { AuthContext } from "@/app/_components/Providers/AuthProvider";
 import { TwitterShareButton } from "@components/TwitterShareButton";
 import twitterShareLinkGen from "@/src/utils/twitterShareLinkGen";
 import { Card } from "@components/Card";
@@ -11,6 +18,65 @@ export const DodoitsuCard = ({
   displayDiscrition = true,
   displayFooter = true,
 }: Props) => {
+  const { user } = useContext(AuthContext);
+
+  const [isLiked, setIsLiked] = useState<boolean>(
+    dodoitsu ? dodoitsu.isLiked : false
+  );
+
+  const { mutate: likeDodoitsu } = useMutation(
+    async () => {
+      setIsLiked(true);
+
+      return await fetch(`/api/dodoitsu/${dodoitsu!.id}/like`, {
+        credentials: "include",
+        method: "POST",
+      }).then((res) => {
+        if (!res.ok) {
+          throw new Error();
+        }
+      });
+    },
+    {
+      onError: () => {
+        alert(
+          "いいねに失敗しました。\nログインし直して、もう一度お試しください"
+        );
+        setIsLiked(false);
+      },
+    }
+  );
+
+  const { mutate: unlikeDodoitsu } = useMutation(
+    async () => {
+      setIsLiked(false);
+      await fetch(`/api/dodoitsu/${dodoitsu!.id}/unlike`, {
+        credentials: "include",
+        method: "DELETE",
+      }).then((res) => {
+        if (!res.ok) {
+          throw new Error();
+        }
+      });
+    },
+    {
+      onError: () => {
+        alert(
+          "いいねの取り消しに失敗しました。\nログインし直して、もう一度お試しください"
+        );
+        setIsLiked(true);
+      },
+    }
+  );
+
+  const onClickHeart = () => {
+    if (!user) {
+      alert("ログインしてください");
+      return;
+    }
+    isLiked ? unlikeDodoitsu() : likeDodoitsu();
+  };
+
   const Loading = () => {
     return (
       <Card>
@@ -45,10 +111,9 @@ export const DodoitsuCard = ({
     hashtags: ["都々逸ライフ", "都々逸"],
     // TODO: pathの動的な取得が現状できないので、一旦固定値を入れておく
     url: `https://dodoitsu-life.vercel.app/dodoitsu/detail/${dodoitsu.id}`,
-    // via: dodoitsu.autherTwitterId,
+    via: dodoitsu.author?.twitterId,
     related: ["fal_engineer"],
   });
-
   return (
     <Card clickable={clickable}>
       <div className="m-8">
@@ -70,9 +135,22 @@ export const DodoitsuCard = ({
               href={twitterShareLink}
               className="w-5 h-5 lg:w-8 lg:h-8 z-10"
             />
-            {/* <button className="ml-3 bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-2 rounded-full">
-          <HeartIcon className="h-8 w-8" />
-        </button> */}
+
+            <button
+              className={`ml-3 text-white font-bold py-2 px-2 rounded-full ${
+                isLiked
+                  ? "bg-red-300 hover:bg-red-400"
+                  : "bg-gray-300 hover:bg-gray-400"
+              }
+              ${
+                user
+                  ? "cursor-pointer"
+                  : "cursor-not-allowed bg-gray-300 hover:bg-gray-300"
+              }`}
+              onClick={() => onClickHeart()}
+            >
+              <SolidHeartIcon className="w-5 h-5 lg:w-8 lg:h-8" />
+            </button>
           </div>
         )}
       </div>

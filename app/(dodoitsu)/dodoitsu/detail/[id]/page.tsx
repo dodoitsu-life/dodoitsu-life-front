@@ -7,16 +7,17 @@ type Params = {
 };
 
 export async function generateMetadata({ params }: { params: Params }) {
-  const { dodoitsu } = await getDodoitsuById({ id: params.id });
+  await getDodoitsuById({ id: params.id }).then((res) => {
+    const dodoitsu = res.dodoitsu;
+    // TODO: pathの動的な取得が現状できないので、一旦固定値を入れておく
+    const url = "https://dodoitsu-life.vercel.app";
 
-  // TODO: pathの動的な取得が現状できないので、一旦固定値を入れておく
-  const url = "https://dodoitsu-life.vercel.app";
-
-  return seoGen({
-    title: `都々逸ライフ｜${dodoitsu.content}`,
-    description: dodoitsu.description,
-    url: `${url}/dodoitsu/detail/${dodoitsu.id}`,
-    imageUrl: `${url}/api/ogp?content=${dodoitsu.content}`,
+    return seoGen({
+      title: `都々逸ライフ｜${dodoitsu.content}`,
+      description: dodoitsu.description,
+      url: `${url}/dodoitsu/detail/${dodoitsu.id}`,
+      imageUrl: `${url}/api/ogp?content=${dodoitsu.content}`,
+    });
   });
 }
 

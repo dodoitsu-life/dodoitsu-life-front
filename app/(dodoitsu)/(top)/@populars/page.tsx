@@ -17,12 +17,7 @@ type DodoitsuListResponse = {
 
 const getDodoitsuList = async (): Promise<DodoitsuListResponse> => {
   const res = await fetch(
-    `/api/dodoitsu/popular?page=1&limit=${ITEMS_PER_PAGE}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
+    `/api/dodoitsu/popular?page=1&limit=${ITEMS_PER_PAGE}`
   );
 
   return await res.json();

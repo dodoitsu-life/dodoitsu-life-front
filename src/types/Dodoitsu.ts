@@ -1,15 +1,10 @@
-export interface Author {
-  id: string;
-  name: string;
-  photo: string;
-  twitterId: string;
-  createdAt: Date;
-}
-
+import { User } from "./User";
 export interface Dodoitsu {
   id: string;
   content: string;
-  description?: string;
-  author?: Author;
   createdAt: Date;
+  isLiked: boolean;
+  likeCount: number;
+  description?: string;
+  author?: User;
 }

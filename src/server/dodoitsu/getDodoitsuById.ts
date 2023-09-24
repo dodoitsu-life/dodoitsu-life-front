@@ -1,7 +1,5 @@
-import axios from "axios";
-import { cache } from "react";
-import { Dodoitsu } from "../../types/Dodoitsu";
-import { appConfig } from "@/src/config/app.config";
+import $axios from "@/src/lib/axios";
+import { Dodoitsu } from "@/src/types/Dodoitsu";
 
 type GetDodoitsuByIdRequest = {
   id: string;
@@ -9,18 +7,14 @@ type GetDodoitsuByIdRequest = {
 
 type GetDodoitsuByIdResponse = { dodoitsu: Dodoitsu };
 
-export const getDodoitsuById = cache(
-  async (query: GetDodoitsuByIdRequest): Promise<GetDodoitsuByIdResponse> => {
-    const { api } = appConfig();
-    const { data: dodoitsu }: { data: Dodoitsu } = await axios
-      .get(`${api.baseUrl}/dodoitsu/${query.id}`)
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        throw new Error(error);
-      });
+export const getDodoitsuById = async (
+  query: GetDodoitsuByIdRequest
+): Promise<GetDodoitsuByIdResponse> => {
+  const { data: dodoitsu }: { data: Dodoitsu } = await $axios
+    .get(`/dodoitsu/${query.id}`)
+    .then((response) => {
+      return response.data;
+    });
 
-    return { dodoitsu };
-  }
-);
+  return { dodoitsu };
+};

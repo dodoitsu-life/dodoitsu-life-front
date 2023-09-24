@@ -1,7 +1,6 @@
-import axios from "axios";
 import { cache } from "react";
-import { Dodoitsu } from "../../types/Dodoitsu";
-import { appConfig } from "@/src/config/app.config";
+import $axios from "@/src/lib/axios";
+import { Dodoitsu } from "@/src/types/Dodoitsu";
 
 type GetDodoitsuListRequest = {
   page: number;
@@ -12,41 +11,29 @@ type GetDodoitsuListResponse = { dodoitsuList: Dodoitsu[]; count: number };
 
 export const getLatestDodoitsuList = cache(
   async (query: GetDodoitsuListRequest): Promise<GetDodoitsuListResponse> => {
-    const { api } = appConfig();
-
     const config = {
       params: query,
     };
 
-    return await axios
-      .get(`${api.baseUrl}/dodoitsu/latest`, config)
-      .then((response) => {
-        const dodoitsuList = response.data.data;
-        const count = response.data.count;
-        return { dodoitsuList, count };
-      })
-      .catch((error) => {
-        throw new Error(error);
+    const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
+      await $axios.get("/dodoitsu/latest", config).then((response) => {
+        return response.data;
       });
+
+    return { dodoitsuList, count };
   }
 );
 
 export const getPopularDodoitsuList = cache(
   async (query: GetDodoitsuListRequest): Promise<GetDodoitsuListResponse> => {
-    const { api } = appConfig();
     const config = {
       params: query,
     };
 
-    return await axios
-      .get(`${api.baseUrl}/dodoitsu/popular`, config)
-      .then((response) => {
-        const dodoitsuList = response.data.data;
-        const count = response.data.count;
-        return { dodoitsuList, count };
-      })
-      .catch((error) => {
-        throw new Error(error);
+    const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
+      await $axios.get("/dodoitsu/popular", config).then((response) => {
+        return response.data;
       });
+    return { dodoitsuList, count };
   }
 );

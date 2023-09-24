@@ -1,16 +1,21 @@
-import axios from "axios";
-import { cache } from "react";
-import { appConfig } from "@/src/config/app.config";
+import $axios from "@/src/lib/axios";
 
-type GetLogoutRequest = { body: { refreshToken: string } };
+type PostTokenRefreshRequest = { body: { refreshToken: string } };
 
-export const tokenRefresh = cache(
-  async ({ body }: GetLogoutRequest): Promise<void> => {
-    const { api } = appConfig();
-    await axios
-      .post(`${api.baseUrl}/auth/refresh-token`, { body })
-      .catch((error) => {
-        throw new Error(error);
-      });
-  }
-);
+export const tokenRefresh = async ({
+  body,
+}: PostTokenRefreshRequest): Promise<{
+  access_token: string;
+  refresh_token: string;
+}> => {
+  return await $axios
+    .post("/auth/refresh-token", body, { withCredentials: true })
+    .then((response) => {
+      const { access_token, refresh_token } = response.data;
+      return { access_token, refresh_token };
+    })
+    .catch((error) => {
+      console.log("error", error);
+      throw error;
+    });
+};
