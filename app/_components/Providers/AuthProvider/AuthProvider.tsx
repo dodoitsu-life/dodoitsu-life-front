@@ -11,6 +11,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
+    if (storedUser === "undefined") {
+      localStorage.removeItem("user");
+      return;
+    }
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
@@ -21,16 +25,16 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUser(userData);
   };
 
-  const logOut = async () => {
-    await fetch("/api/auth/logout", {
+  const logOut = () => {
+    fetch("/api/auth/logout", {
       method: "GET",
       credentials: "include",
     });
-    await localStorage.removeItem("user");
+    localStorage.removeItem("user");
+    setUser(null);
 
     Cookies.remove("auth_token");
     Cookies.remove("refresh_token");
-    setUser(null);
   };
 
   return (
