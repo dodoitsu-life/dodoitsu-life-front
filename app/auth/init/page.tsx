@@ -23,8 +23,8 @@ export default function Page() {
 
   const { logIn } = useContext(AuthContext);
   useQuery("me", getMe, {
-    onSuccess: (data) => {
-      logIn(data);
+    onSuccess: async (data) => {
+      await logIn(data);
       router.push("/");
     },
     onError: (error: Error) => {
