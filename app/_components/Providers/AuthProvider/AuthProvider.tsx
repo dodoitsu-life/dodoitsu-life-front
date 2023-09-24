@@ -20,8 +20,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
-  const logIn = (userData: User) => {
-    localStorage.setItem("user", JSON.stringify(userData));
+  const logIn = async (userData: User) => {
+    await localStorage.setItem("user", JSON.stringify(userData));
     setUser(userData);
   };
 
