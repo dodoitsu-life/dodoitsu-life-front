@@ -20,6 +20,63 @@ export const DodoitsuCard = ({
 }: Props) => {
   const { user } = useContext(AuthContext);
 
+  const [isLiked, setIsLiked] = useState<boolean>(
+    dodoitsu ? dodoitsu.isLiked : false
+  );
+
+  const { mutate: likeDodoitsu } = useMutation(
+    async () => {
+      setIsLiked(true);
+
+      return await fetch(`/api/dodoitsu/${dodoitsu!.id}/like`, {
+        credentials: "include",
+        method: "POST",
+      }).then((res) => {
+        if (!res.ok) {
+          throw new Error();
+        }
+      });
+    },
+    {
+      onError: () => {
+        alert(
+          "いいねに失敗しました。\nログインし直して、もう一度お試しください"
+        );
+        setIsLiked(false);
+      },
+    }
+  );
+
+  const { mutate: unlikeDodoitsu } = useMutation(
+    async () => {
+      setIsLiked(false);
+      await fetch(`/api/dodoitsu/${dodoitsu!.id}/unlike`, {
+        credentials: "include",
+        method: "DELETE",
+      }).then((res) => {
+        if (!res.ok) {
+          throw new Error();
+        }
+      });
+    },
+    {
+      onError: () => {
+        alert(
+          "いいねの取り消しに失敗しました。\nログインし直して、もう一度お試しください"
+        );
+        setIsLiked(true);
+      },
+    }
+  );
+
+  const onClickHeart = () => {
+    if (!user) {
+      alert("ログインしてください");
+      return;
+    }
+    isLiked ? unlikeDodoitsu() : likeDodoitsu();
+  };
+
   const Loading = () => {
     return (
       <Card>
@@ -57,62 +114,6 @@ export const DodoitsuCard = ({
     via: dodoitsu.author?.twitterId,
     related: ["fal_engineer"],
   });
-
-  const [isLiked, setIsLiked] = useState<boolean>(dodoitsu.isLiked);
-
-  const { mutate: likeDodoitsu } = useMutation(
-    async () => {
-      setIsLiked(true);
-
-      return await fetch(`/api/dodoitsu/${dodoitsu.id}/like`, {
-        credentials: "include",
-        method: "POST",
-      }).then((res) => {
-        if (!res.ok) {
-          throw new Error();
-        }
-      });
-    },
-    {
-      onError: () => {
-        alert(
-          "いいねに失敗しました。\nログインし直して、もう一度お試しください"
-        );
-        setIsLiked(false);
-      },
-    }
-  );
-
-  const { mutate: unlikeDodoitsu } = useMutation(
-    async () => {
-      setIsLiked(false);
-      await fetch(`/api/dodoitsu/${dodoitsu.id}/unlike`, {
-        credentials: "include",
-        method: "DELETE",
-      }).then((res) => {
-        if (!res.ok) {
-          throw new Error();
-        }
-      });
-    },
-    {
-      onError: () => {
-        alert(
-          "いいねの取り消しに失敗しました。\nログインし直して、もう一度お試しください"
-        );
-        setIsLiked(true);
-      },
-    }
-  );
-
-  const onClickHeart = () => {
-    if (!user) {
-      alert("ログインしてください");
-      return;
-    }
-    isLiked ? unlikeDodoitsu() : likeDodoitsu();
-  };
-
   return (
     <Card clickable={clickable}>
       <div className="m-8">
