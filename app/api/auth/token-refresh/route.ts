@@ -5,7 +5,6 @@ import { tokenRefresh } from "@/src/server/auth/tokenRefresh";
 export async function POST() {
   const cookieStore = cookies();
   const refreshToken = cookieStore.get("refresh_token")!.value;
-  console.log("refresh_token", refreshToken);
   return await tokenRefresh({ body: { refreshToken } })
     .then((response) => {
       const { access_token, refresh_token } = response;
