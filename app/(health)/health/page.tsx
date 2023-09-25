@@ -2,26 +2,25 @@
 import { useQuery } from "react-query";
 import { useContext } from "react";
 import Image from "next/image";
-import { cache } from "react";
 import { User } from "@/src/types/User";
 import { AuthContext } from "@/app/_components/Providers/AuthProvider";
 import { Card } from "@components/Card";
 
-const getMe = cache(async (): Promise<User> => {
+const getMe = async (): Promise<User> => {
   const res = await fetch("/api/auth/me", {
     credentials: "include",
   });
   console.log(res);
   console.log(res.ok);
-  console.log(await res.json());
 
   if (!res.ok) {
     throw new Error("ログインに失敗しました");
   }
 
   const resJson = await res.json();
-  return resJson.user;
-});
+  console.log(resJson.data);
+  return resJson.data;
+};
 
 export default function Page() {
   const { user, logIn, logOut } = useContext(AuthContext);
@@ -34,14 +33,28 @@ export default function Page() {
     logOut();
   };
 
-  useQuery("me", getMe, {
-    onSuccess: (data) => {
-      logIn(data);
+  useQuery(
+    "me",
+    async () => {
+      const res = await fetch("/api/auth/me", {
+        credentials: "include",
+      });
+      if (!res.ok) {
+        throw new Error("ログインに失敗しました");
+      }
+
+      const resJson = await res.json();
+      return resJson.data;
     },
-    onError: (error: Error) => {
-      alert(error.message);
-    },
-  });
+    {
+      onSuccess: (data) => {
+        logIn(data);
+      },
+      onError: (error: Error) => {
+        alert(error.message);
+      },
+    }
+  );
 
   return (
     <div className="container mx-auto flex justify-center h-full max-w-7xl py-12 px-2">

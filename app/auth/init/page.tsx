@@ -15,20 +15,20 @@ export default function Page() {
         credentials: "include",
       });
       console.log(res);
-      console.log(await res.json);
 
       if (!res.ok) {
         throw new Error("ログインに失敗しました");
       }
 
       const resJson = await res.json();
+      console.log(resJson);
       console.log(resJson.data);
       return resJson.data;
     },
     {
       onSuccess: async (res) => {
         await logIn(res);
-        router.push("/");
+        // router.push("/");
       },
       onError: (error: Error) => {
         alert(error.message);
