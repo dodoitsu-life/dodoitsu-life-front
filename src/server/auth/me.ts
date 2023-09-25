@@ -8,7 +8,7 @@ export const getMe = cache(async (): Promise<GetMeResponse> => {
   const { data: user }: { data: User } = await $axios
     .get("/auth/me", { withCredentials: true })
     .then((response) => {
-      const data = response.data;
+      const data = response;
       return data;
     })
     .catch((error) => {
