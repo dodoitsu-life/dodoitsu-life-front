@@ -21,7 +21,7 @@ const getMe = cache(async (): Promise<User> => {
   const resJson = await res.json();
   console.log(resJson.data);
   return resJson.data;
-};
+});
 
 export default function Page() {
   const { user, logIn, logOut } = useContext(AuthContext);
