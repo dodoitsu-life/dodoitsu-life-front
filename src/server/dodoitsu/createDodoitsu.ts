@@ -13,10 +13,7 @@ export const createDodoitsu = async ({
 }: {
   body: CreateDodoitsuRequest;
 }): Promise<CreateDodoitsuResponse> => {
-  const { data: dodoitsu }: { data: Dodoitsu } = await $axios
-    .post("/dodoitsu", body)
-    .then((response) => {
-      return response.data;
-    });
-  return { id: dodoitsu.id };
+  return await $axios.post("/dodoitsu", body).then((response) => {
+    return { id: response.data.data.id };
+  });
 };
