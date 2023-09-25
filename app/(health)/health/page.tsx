@@ -13,14 +13,14 @@ const getMe = cache(async (): Promise<User> => {
   });
   console.log(res);
   console.log(res.ok);
-  console.log(await res.json());
 
   if (!res.ok) {
     throw new Error("ログインに失敗しました");
   }
 
   const resJson = await res.json();
-  return resJson.user;
+  console.log(resJson.data);
+  return resJson.data;
 });
 
 export default function Page() {
@@ -34,14 +34,28 @@ export default function Page() {
     logOut();
   };
 
-  useQuery("me", getMe, {
-    onSuccess: (data) => {
-      logIn(data);
+  useQuery(
+    "me",
+    async () => {
+      const res = await fetch("/api/auth/me", {
+        credentials: "include",
+      });
+      if (!res.ok) {
+        throw new Error("ログインに失敗しました");
+      }
+
+      const resJson = await res.json();
+      return resJson.data;
     },
-    onError: (error: Error) => {
-      alert(error.message);
-    },
-  });
+    {
+      onSuccess: (data) => {
+        logIn(data);
+      },
+      onError: (error: Error) => {
+        alert(error.message);
+      },
+    }
+  );
 
   return (
     <div className="container mx-auto flex justify-center h-full max-w-7xl py-12 px-2">
