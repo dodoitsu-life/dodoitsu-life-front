@@ -9,6 +9,7 @@ import { Card } from "@components/Card";
 const getMe = async (): Promise<User> => {
   const res = await fetch("/api/auth/me", {
     credentials: "include",
+    cache: "no-cache",
   });
   console.log(res);
   console.log(res.ok);
@@ -25,6 +26,7 @@ const getMe = async (): Promise<User> => {
 const getUserMe = async (): Promise<User> => {
   const res = await fetch("/api/user/me", {
     credentials: "include",
+    cache: "no-cache",
   });
   console.log(res);
   console.log(res.ok);
