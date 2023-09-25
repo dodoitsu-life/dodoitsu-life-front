@@ -10,6 +10,9 @@ const getMe = async (): Promise<User> => {
   const res = await fetch("/api/auth/me", {
     credentials: "include",
   });
+  console.log(res);
+  console.log(res.ok);
+  console.log(await res.json());
 
   if (!res.ok) {
     throw new Error("ログインに失敗しました");

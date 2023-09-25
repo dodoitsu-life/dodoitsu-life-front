@@ -1,7 +1,6 @@
 import $axios from "@/src/lib/axios";
 import { cache } from "react";
 import { User } from "../../types/User";
-import { appConfig } from "@/src/config/app.config";
 
 type GetMeResponse = { user: User } | null;
 
