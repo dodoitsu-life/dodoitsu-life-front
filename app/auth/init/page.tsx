@@ -13,7 +13,7 @@ export default function Page() {
     async () => {
       const res = await fetch("/api/auth/me", {
         credentials: "include",
-        cache: "no-cache",
+        cache: "no-store",
       });
 
       if (!res.ok) {

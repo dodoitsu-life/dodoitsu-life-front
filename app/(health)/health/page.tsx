@@ -9,7 +9,7 @@ import { Card } from "@components/Card";
 const getMe = async (): Promise<User> => {
   const res = await fetch("/api/auth/me", {
     credentials: "include",
-    cache: "no-cache",
+    cache: "no-store",
   });
   console.log(res);
   console.log(res.ok);
@@ -39,7 +39,7 @@ export default function Page() {
     async () => {
       const res = await fetch("/api/auth/me", {
         credentials: "include",
-        cache: "no-cache",
+        cache: "no-store",
       });
       if (!res.ok) {
         throw new Error("ログインに失敗しました");
