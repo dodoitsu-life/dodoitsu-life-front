@@ -2,11 +2,12 @@
 import { useQuery } from "react-query";
 import { useContext } from "react";
 import Image from "next/image";
+import { cache } from "react";
 import { User } from "@/src/types/User";
 import { AuthContext } from "@/app/_components/Providers/AuthProvider";
 import { Card } from "@components/Card";
 
-const getMe = async (): Promise<User> => {
+const getMe = cache(async (): Promise<User> => {
   const res = await fetch("/api/auth/me", {
     credentials: "include",
   });
