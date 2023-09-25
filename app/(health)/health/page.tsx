@@ -23,23 +23,6 @@ const getMe = async (): Promise<User> => {
   return resJson.data;
 };
 
-const getUserMe = async (): Promise<User> => {
-  const res = await fetch("/api/user/me", {
-    credentials: "include",
-    cache: "no-cache",
-  });
-  console.log(res);
-  console.log(res.ok);
-
-  if (!res.ok) {
-    throw new Error("ログインに失敗しました");
-  }
-
-  const resJson = await res.json();
-  console.log(resJson.data);
-  return resJson.data;
-};
-
 export default function Page() {
   const { user, logIn, logOut } = useContext(AuthContext);
 
@@ -97,14 +80,7 @@ export default function Page() {
             <div>
               <button onClick={() => getMe()}>
                 <div className="h-full text-xl flex items-center font-noto-serif p-1 pr-2 text-black hover:bg-primary-light">
-                  プロフィールの取得 api/auth/me
-                </div>
-              </button>
-            </div>
-            <div>
-              <button onClick={() => getUserMe()}>
-                <div className="h-full text-xl flex items-center font-noto-serif p-1 pr-2 text-black hover:bg-primary-light">
-                  プロフィールの取得 api/user/me
+                  プロフィールの取得
                 </div>
               </button>
             </div>
