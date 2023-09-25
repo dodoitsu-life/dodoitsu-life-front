@@ -1,5 +1,4 @@
 import $axios from "@/src/lib/axios";
-import { Dodoitsu } from "@/src/types/Dodoitsu";
 
 type CreateDodoitsuRequest = {
   content: string;
