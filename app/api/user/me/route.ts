@@ -3,7 +3,6 @@ import { getMe } from "@/src/server/auth/me";
 
 // 動的レンダリングを強制する
 export const dynamic = "force-dynamic";
-export const runtime = "edge";
 
 export async function GET(_: NextRequest) {
   return await getMe()
