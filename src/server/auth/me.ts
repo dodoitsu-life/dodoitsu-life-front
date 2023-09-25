@@ -6,10 +6,9 @@ type GetMeResponse = { user: User } | null;
 
 export const getMe = cache(async (): Promise<GetMeResponse> => {
   const { data: user }: { data: User } = await $axios
-    .get("/auth/me", { withCredentials: true })
+    .get("/auth/me")
     .then((response) => {
-      const data = response;
-      return data;
+      return response.data;
     })
     .catch((error) => {
       throw error;
