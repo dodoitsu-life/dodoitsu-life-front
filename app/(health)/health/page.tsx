@@ -2,12 +2,11 @@
 import { useQuery } from "react-query";
 import { useContext } from "react";
 import Image from "next/image";
-import { cache } from "react";
 import { User } from "@/src/types/User";
 import { AuthContext } from "@/app/_components/Providers/AuthProvider";
 import { Card } from "@components/Card";
 
-const getMe = cache(async (): Promise<User> => {
+const getMe = async (): Promise<User> => {
   const res = await fetch("/api/auth/me", {
     credentials: "include",
   });
@@ -21,7 +20,23 @@ const getMe = cache(async (): Promise<User> => {
   const resJson = await res.json();
   console.log(resJson.data);
   return resJson.data;
-});
+};
+
+const getUserMe = async (): Promise<User> => {
+  const res = await fetch("/api/user/me", {
+    credentials: "include",
+  });
+  console.log(res);
+  console.log(res.ok);
+
+  if (!res.ok) {
+    throw new Error("ログインに失敗しました");
+  }
+
+  const resJson = await res.json();
+  console.log(resJson.data);
+  return resJson.data;
+};
 
 export default function Page() {
   const { user, logIn, logOut } = useContext(AuthContext);
@@ -80,7 +95,14 @@ export default function Page() {
             <div>
               <button onClick={() => getMe()}>
                 <div className="h-full text-xl flex items-center font-noto-serif p-1 pr-2 text-black hover:bg-primary-light">
-                  プロフィールの取得
+                  プロフィールの取得 api/auth/me
+                </div>
+              </button>
+            </div>
+            <div>
+              <button onClick={() => getUserMe()}>
+                <div className="h-full text-xl flex items-center font-noto-serif p-1 pr-2 text-black hover:bg-primary-light">
+                  プロフィールの取得 api/user/me
                 </div>
               </button>
             </div>
