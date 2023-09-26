@@ -13,6 +13,9 @@ export const getLatestDodoitsuList = cache(
   async (query: GetDodoitsuListRequest): Promise<GetDodoitsuListResponse> => {
     const config = {
       params: query,
+      headers: {
+        "Cache-Control": "no-store",
+      },
     };
 
     const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
@@ -28,6 +31,9 @@ export const getPopularDodoitsuList = cache(
   async (query: GetDodoitsuListRequest): Promise<GetDodoitsuListResponse> => {
     const config = {
       params: query,
+      headers: {
+        "Cache-Control": "no-store",
+      },
     };
 
     const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
@@ -46,6 +52,9 @@ export const getUserPostedDodoitsuList = cache(
   ): Promise<GetDodoitsuListResponse> => {
     const config = {
       params: query,
+      headers: {
+        "Cache-Control": "no-store",
+      },
     };
 
     const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
@@ -64,6 +73,9 @@ export const getUserLikedDodoitsuList = cache(
   ): Promise<GetDodoitsuListResponse> => {
     const config = {
       params: query,
+      headers: {
+        "Cache-Control": "no-store",
+      },
     };
 
     const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
