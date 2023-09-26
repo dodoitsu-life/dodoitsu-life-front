@@ -13,7 +13,6 @@ export const getMe = async (): Promise<GetMeResponse> => {
       },
     })
     .then((response) => {
-      console.log(response.data);
       return response.data;
     });
 };
