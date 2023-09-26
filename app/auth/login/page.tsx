@@ -9,18 +9,14 @@ export default function Page() {
   const router = useRouter();
   const { user } = useContext(AuthContext);
 
-  if (user) {
-    router.push("/mypage");
-  }
-
   const handleLogin = () => {
-    window.location.href = "/api/auth/login";
+    router.push("/api/auth/login");
   };
 
   return (
     <div className="container text-center mx-auto flex justify-center h-full max-w-4xl py-12 px-2">
       <Card>
-        <article className="min-w-full p-24 text-xs">
+        <article className="min-w-full lg:p-24 p-20 text-xs">
           <div className="w-full flex justify-center">
             <button
               onClick={handleLogin}

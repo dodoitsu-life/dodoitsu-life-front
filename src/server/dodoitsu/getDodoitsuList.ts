@@ -34,6 +34,45 @@ export const getPopularDodoitsuList = cache(
       await $axios.get("/dodoitsu/popular", config).then((response) => {
         return response.data;
       });
+
+    return { dodoitsuList, count };
+  }
+);
+
+export const getUserPostedDodoitsuList = cache(
+  async (
+    userId: string,
+    query: GetDodoitsuListRequest
+  ): Promise<GetDodoitsuListResponse> => {
+    const config = {
+      params: query,
+    };
+
+    const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
+      await $axios.get(`/dodoitsu/user/${userId}`, config).then((response) => {
+        return response.data;
+      });
+
+    return { dodoitsuList, count };
+  }
+);
+
+export const getUserLikedDodoitsuList = cache(
+  async (
+    userId: string,
+    query: GetDodoitsuListRequest
+  ): Promise<GetDodoitsuListResponse> => {
+    const config = {
+      params: query,
+    };
+
+    const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
+      await $axios
+        .get(`/dodoitsu/user/${userId}/liked`, config)
+        .then((response) => {
+          return response.data;
+        });
+
     return { dodoitsuList, count };
   }
 );
