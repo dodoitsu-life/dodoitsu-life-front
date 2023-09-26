@@ -2,6 +2,8 @@
 
 import { Props } from "./types";
 import { useState, useContext } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { useMutation } from "react-query";
 import { HeartIcon as SolidHeartIcon } from "@heroicons/react/24/solid";
 
@@ -23,10 +25,14 @@ export const DodoitsuCard = ({
   const [isLiked, setIsLiked] = useState<boolean>(
     dodoitsu ? dodoitsu.isLiked : false
   );
+  const [likeCount, setLikeCount] = useState<number>(
+    dodoitsu ? dodoitsu.likeCount : 0
+  );
 
   const { mutate: likeDodoitsu } = useMutation(
     async () => {
       setIsLiked(true);
+      setLikeCount(likeCount + 1);
 
       return await fetch(`/api/dodoitsu/${dodoitsu!.id}/like`, {
         credentials: "include",
@@ -42,6 +48,7 @@ export const DodoitsuCard = ({
         alert(
           "いいねに失敗しました。\nログインし直して、もう一度お試しください"
         );
+        setLikeCount(likeCount - 1);
         setIsLiked(false);
       },
     }
@@ -50,6 +57,7 @@ export const DodoitsuCard = ({
   const { mutate: unlikeDodoitsu } = useMutation(
     async () => {
       setIsLiked(false);
+      setLikeCount(likeCount - 1);
       await fetch(`/api/dodoitsu/${dodoitsu!.id}/unlike`, {
         credentials: "include",
         method: "DELETE",
@@ -64,6 +72,7 @@ export const DodoitsuCard = ({
         alert(
           "いいねの取り消しに失敗しました。\nログインし直して、もう一度お試しください"
         );
+        setLikeCount(likeCount + 1);
         setIsLiked(true);
       },
     }
@@ -114,6 +123,7 @@ export const DodoitsuCard = ({
     via: dodoitsu.author?.twitterId,
     related: ["fal_engineer"],
   });
+
   return (
     <Card clickable={clickable}>
       <div className="m-8">
@@ -131,26 +141,47 @@ export const DodoitsuCard = ({
 
         {displayFooter && (
           <div className="flex items-center justify-end border-t border-gray-300 pt-5">
+            {dodoitsu.author && (
+              <Link
+                href={`/profile/${dodoitsu.author.id}`}
+                className="hover:bg-gray-50 text-2xl flex items-end p-4 font-noto-serif text-gray-900"
+              >
+                <p className="text-xl hidden md:block">
+                  {dodoitsu.author.name}
+                </p>
+                <Image
+                  src={dodoitsu.author.photo}
+                  width={45}
+                  height={45}
+                  alt="user photo"
+                  className="rounded-full"
+                />
+              </Link>
+            )}
+
             <TwitterShareButton
               href={twitterShareLink}
               className="w-5 h-5 lg:w-8 lg:h-8 z-10"
             />
 
-            <button
-              className={`ml-3 text-white font-bold py-2 px-2 rounded-full ${
-                isLiked
-                  ? "bg-red-300 hover:bg-red-400"
-                  : "bg-gray-300 hover:bg-gray-400"
-              }
+            <div className="flex items-end">
+              <button
+                className={`ml-3 text-white font-bold py-2 px-2 rounded-full ${
+                  isLiked
+                    ? "bg-red-300 hover:bg-red-400"
+                    : "bg-gray-300 hover:bg-gray-400"
+                }
               ${
                 user
                   ? "cursor-pointer"
                   : "cursor-not-allowed bg-gray-300 hover:bg-gray-300"
               }`}
-              onClick={() => onClickHeart()}
-            >
-              <SolidHeartIcon className="w-5 h-5 lg:w-8 lg:h-8" />
-            </button>
+                onClick={() => onClickHeart()}
+              >
+                <SolidHeartIcon className="w-5 h-5 lg:w-8 lg:h-8" />
+              </button>
+              <p className="text-xl ml-1 text-stone-600">{likeCount}</p>
+            </div>
           </div>
         )}
       </div>
