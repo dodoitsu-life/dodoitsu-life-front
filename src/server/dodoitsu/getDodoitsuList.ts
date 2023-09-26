@@ -1,5 +1,6 @@
 import { cache } from "react";
 import $axios from "@/src/lib/axios";
+import { tokenRefresh } from "@/src/server/auth/tokenRefresh";
 import { Dodoitsu } from "@/src/types/Dodoitsu";
 
 type GetDodoitsuListRequest = {
@@ -11,6 +12,7 @@ type GetDodoitsuListResponse = { dodoitsuList: Dodoitsu[]; count: number };
 
 export const getLatestDodoitsuList = cache(
   async (query: GetDodoitsuListRequest): Promise<GetDodoitsuListResponse> => {
+    await tokenRefresh();
     const config = {
       params: query,
     };
@@ -26,6 +28,7 @@ export const getLatestDodoitsuList = cache(
 
 export const getPopularDodoitsuList = cache(
   async (query: GetDodoitsuListRequest): Promise<GetDodoitsuListResponse> => {
+    await tokenRefresh();
     const config = {
       params: query,
     };
@@ -44,6 +47,7 @@ export const getUserPostedDodoitsuList = cache(
     userId: string,
     query: GetDodoitsuListRequest
   ): Promise<GetDodoitsuListResponse> => {
+    await tokenRefresh();
     const config = {
       params: query,
     };
@@ -62,6 +66,7 @@ export const getUserLikedDodoitsuList = cache(
     userId: string,
     query: GetDodoitsuListRequest
   ): Promise<GetDodoitsuListResponse> => {
+    await tokenRefresh();
     const config = {
       params: query,
     };

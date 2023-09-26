@@ -9,8 +9,9 @@ const $axios = axios.create({
 });
 
 $axios.interceptors.request.use(
-  (config) => {
+  async (config) => {
     const cookieStore = cookies();
+
     const token = cookieStore.get("auth_token")?.value;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

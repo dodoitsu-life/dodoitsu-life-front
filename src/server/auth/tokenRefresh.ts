@@ -1,21 +1,26 @@
 import $axios from "@/src/lib/axios";
+import { cookies } from "next/headers";
 
-type PostTokenRefreshRequest = { body: { refreshToken: string } };
+export const tokenRefresh = async () => {
+  const cookieStore = cookies();
+  const refreshToken = cookieStore.get("refresh_token")?.value;
+  if (!refreshToken) return;
 
-export const tokenRefresh = async ({
-  body,
-}: PostTokenRefreshRequest): Promise<{
-  access_token: string;
-  refresh_token: string;
-}> => {
-  return await $axios
-    .post("/auth/refresh-token", body, { withCredentials: true })
+  await $axios
+    .post("/auth/refresh-token", { refreshToken }, { withCredentials: true })
     .then((response) => {
       const { access_token, refresh_token } = response.data;
-      return { access_token, refresh_token };
+      const isServer = typeof window === "undefined";
+
+      if (!isServer) {
+        document.cookie = `auth_token=${access_token}`;
+        document.cookie = `refresh_token=${refresh_token}`;
+      } else {
+        cookieStore.set("auth_token", access_token);
+        cookieStore.set("refresh_token", refresh_token);
+      }
     })
     .catch((error) => {
-      console.log("error", error);
-      throw error;
+      console.warn(error);
     });
 };
