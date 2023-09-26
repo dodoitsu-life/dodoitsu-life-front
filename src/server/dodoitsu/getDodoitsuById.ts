@@ -11,7 +11,11 @@ export const getDodoitsuById = async (
   query: GetDodoitsuByIdRequest
 ): Promise<GetDodoitsuByIdResponse> => {
   const { data: dodoitsu }: { data: Dodoitsu } = await $axios
-    .get(`/dodoitsu/${query.id}`)
+    .get(`/dodoitsu/${query.id}`, {
+      headers: {
+        "Cache-Control": "no-store",
+      },
+    })
     .then((response) => {
       return response.data;
     });

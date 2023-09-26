@@ -43,7 +43,7 @@ export const Header = () => {
     link: "/auth/login",
   };
 
-  const myPageUrl = `/mypage`;
+  const myPageUrl = `/profile/${user?.id}`;
 
   const userMenus: DropdownMenuItem[] = [
     {
