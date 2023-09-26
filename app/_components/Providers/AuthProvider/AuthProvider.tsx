@@ -12,6 +12,9 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useQuery(
     "me",
     async () => {
+      // そもそもログインしていない場合はnullを返す
+      if (!localStorage.getItem("user")) return null;
+
       localStorage.removeItem("user");
       const res = await fetch("/api/auth/me", {
         credentials: "include",
@@ -22,6 +25,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
 
       const resJson = await res.json();
+      if (!resJson.data) throw new Error("ログインに失敗しました");
       return resJson.data;
     },
     {
