@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
+import Head from "./head";
 import { Header } from "@components/Header";
 import { Footer, type Item as FooterItem } from "@components/Footer";
 import { JotaiProvider } from "@components/Providers/JotaiProvider/JotaiProvider";
@@ -32,6 +33,7 @@ export default function RootLayout({
 
   return (
     <html lang="jp">
+      <Head />
       <body className={`${inter.className} flex flex-col h-screen`}>
         <ReactQueryProvider>
           <JotaiProvider>
