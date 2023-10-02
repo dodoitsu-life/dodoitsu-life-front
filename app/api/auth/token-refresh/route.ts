@@ -5,14 +5,19 @@ import { tokenRefresh } from "@/src/server/auth/tokenRefresh";
 export async function POST() {
   const cookieStore = cookies();
   const refreshToken = cookieStore.get("refresh_token")!.value;
+  console.log("refreshToken", refreshToken);
+
   return await tokenRefresh({ body: { refreshToken } })
     .then((response) => {
       const { access_token, refresh_token } = response;
-      cookies().set("auth_token", access_token);
-      cookies().set("refresh_token", refresh_token);
-      return NextResponse.json({});
+      return NextResponse.json(
+        { access_token, refresh_token },
+        {
+          status: 200,
+        }
+      );
     })
     .catch(() => {
-      return NextResponse.error();
+      return NextResponse.json({}, { status: 401 });
     });
 }
