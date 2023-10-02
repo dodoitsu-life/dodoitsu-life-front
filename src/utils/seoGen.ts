@@ -26,6 +26,7 @@ export default function seoGen({
     twitter: {
       card: "summary_large_image",
       images: imageUrl,
+      site: "@dodoitsulife",
     },
     openGraph: {
       title: title,
