@@ -1,6 +1,15 @@
 import { Metadata } from "next";
-export const metadata: Metadata = {
-  title: "都々逸ライフ｜人気の都々逸",
+import seoGen from "@/src/utils/seoGen";
+
+export const metadata = (): Metadata => {
+  // TODO: pathの動的な取得が現状できないので、一旦固定値を入れておく
+  const url = "https://dodoitsu-life.vercel.app";
+  return seoGen({
+    title: "都々逸ライフ｜人気の都々逸",
+    description: "人気の都々逸を表示します",
+    url: `${url}/dodoitsu/ranking`,
+    imageUrl: `${url}/api/ogp?content=人気の都々逸`,
+  });
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
