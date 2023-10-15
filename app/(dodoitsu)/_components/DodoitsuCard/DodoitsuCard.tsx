@@ -48,7 +48,7 @@ export const DodoitsuCard = ({
         alert(
           "いいねに失敗しました。\nログインし直して、もう一度お試しください"
         );
-        setLikeCount(likeCount - 1);
+        setLikeCount(likeCount);
         setIsLiked(false);
       },
     }
@@ -72,7 +72,7 @@ export const DodoitsuCard = ({
         alert(
           "いいねの取り消しに失敗しました。\nログインし直して、もう一度お試しください"
         );
-        setLikeCount(likeCount + 1);
+        setLikeCount(likeCount);
         setIsLiked(true);
       },
     }

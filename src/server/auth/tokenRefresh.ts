@@ -15,7 +15,6 @@ export const tokenRefresh = async ({
       return { access_token, refresh_token };
     })
     .catch((error) => {
-      console.log("error", error);
       throw error;
     });
 };

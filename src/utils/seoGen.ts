@@ -27,6 +27,7 @@ export default function seoGen({
       card: "summary_large_image",
       images: imageUrl,
       creator: "@dodoitsulife",
+      site: "@dodoitsulife",
     },
     openGraph: {
       title: title,
