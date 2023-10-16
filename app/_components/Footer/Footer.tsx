@@ -1,6 +1,5 @@
 import { Props } from "./types";
 import Link from "next/link";
-import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 
 export const Footer = ({ items }: Props) => {
   const renderItems = items.map((item) => (
@@ -9,7 +8,6 @@ export const Footer = ({ items }: Props) => {
         <Link href={item.to}>{item.text}</Link>
       ) : (
         <a href={item.href} target="_blank" rel="noopener noreferrer">
-          <ArrowTopRightOnSquareIcon className="inline-block w-4 h-4 mr-1" />
           {item.text}
         </a>
       )}
