@@ -8,6 +8,7 @@ import { JotaiProvider } from "@components/Providers/JotaiProvider/JotaiProvider
 import { ReactQueryProvider } from "@components/Providers/ReactQueryProvider";
 import { AuthProvider } from "./_components/Providers/AuthProvider";
 import seoGen from "@/src/utils/seoGen";
+import { appConfig } from "@/src/config/app.config";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const { supportUrl } = appConfig();
   const footerItems: FooterItem[] = [
     {
       text: "利用規約",
@@ -39,6 +41,10 @@ export default function RootLayout({
     {
       text: "特商法表記",
       to: "/transaction-law",
+    },
+    {
+      text: "サービスを支援する",
+      to: supportUrl,
     },
   ];
 
