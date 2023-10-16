@@ -1,6 +1,7 @@
 export type Item = {
   text: string;
-  to: string;
+  to?: string;
+  href?: string;
 };
 
 export type Props = {
