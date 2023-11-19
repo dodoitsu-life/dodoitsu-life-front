@@ -44,7 +44,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const getMe = async () => {
-    if (!localStorage.getItem("user")) return;
+    // 認証トークンがない場合は何もしない
+    if (!Cookies.get("auth_token")) return;
 
     localStorage.removeItem("user");
     const res = await fetch("/api/auth/me", {
