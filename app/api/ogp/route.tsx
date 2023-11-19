@@ -5,13 +5,18 @@ export const runtime = "edge";
 export async function GET(req: NextRequest) {
   const searchParams = new URL(req.url).searchParams;
   const content = searchParams.get("content");
+  const colorCode = searchParams.get("color_code") || "D1BCF7";
+  const authorName = searchParams.get("author_name") || "";
+
+  const authorText = authorName ? `@${authorName}` : "";
 
   return new ImageResponse(
     (
       <div
         style={{
-          backgroundColor: "#D1BCF7",
+          backgroundColor: `#${colorCode}`,
           display: "flex",
+          flexDirection: "column", // 方向を縦方向に設定
           height: "600px",
           width: "1200px",
           justifyContent: "center",
@@ -20,11 +25,20 @@ export async function GET(req: NextRequest) {
       >
         <div
           style={{
+            marginBottom: "15px",
+            fontSize: 45,
+            color: "#000",
+          }}
+        >
+          都々逸ライフ
+        </div>
+        <div
+          style={{
             backgroundColor: "#FFF",
             borderRadius: "10px",
             display: "flex",
             width: "1100px",
-            height: "500px",
+            height: "450px",
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -37,6 +51,18 @@ export async function GET(req: NextRequest) {
           >
             {content}
           </div>
+        </div>
+        <div
+          style={{
+            marginTop: "30px",
+            marginBottom: "20px",
+            right: "15",
+            fontSize: 30,
+            color: "#333",
+            alignSelf: "flex-end",
+          }}
+        >
+          {authorText}
         </div>
       </div>
     ),

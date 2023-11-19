@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Params }) {
       title: `都々逸ライフ｜${dodoitsu.content}`,
       description: dodoitsu.description,
       url: `${url}/dodoitsu/detail/${dodoitsu.id}`,
-      imageUrl: `${url}/api/ogp?content=${dodoitsu.content}`,
+      imageUrl: `${url}/api/ogp?content=${dodoitsu.content}&color_code=D1BCF7&author_name=${dodoitsu.author?.twitterId}`,
     });
   });
 }
