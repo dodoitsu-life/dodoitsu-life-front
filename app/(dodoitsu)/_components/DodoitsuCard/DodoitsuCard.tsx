@@ -1,6 +1,6 @@
 "use client";
 
-import { Props } from "./types";
+import { format, parseISO, isValid } from "date-fns";
 import { useState, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,6 +11,7 @@ import { AuthContext } from "@/app/_components/Providers/AuthProvider";
 import { TwitterShareButton } from "@components/TwitterShareButton";
 import twitterShareLinkGen from "@/src/utils/twitterShareLinkGen";
 import { Card } from "@components/Card";
+import { Props } from "./types";
 
 export const DodoitsuCard = ({
   dodoitsu,
@@ -124,6 +125,15 @@ export const DodoitsuCard = ({
     related: ["fal_engineer"],
   });
 
+  // dodoitsu.createdAt が有効な日付文字列であるか確認
+  const isValidDate =
+    dodoitsu.createdAt && isValid(parseISO(dodoitsu.createdAt));
+
+  // 有効な日付であれば変換し、そうでなければ "" を使用
+  const createdAt = isValidDate
+    ? format(parseISO(dodoitsu.createdAt), "yyyy/MM/dd HH:mm")
+    : "";
+
   return (
     <Card clickable={clickable}>
       <div className="m-8">
@@ -140,47 +150,50 @@ export const DodoitsuCard = ({
         )}
 
         {displayFooter && (
-          <div className="flex items-center justify-end border-t border-gray-300 pt-5">
-            {dodoitsu.author && (
-              <Link
-                href={`/profile/${dodoitsu.author.id}`}
-                className="hover:bg-gray-50 text-2xl flex items-end p-4 font-noto-serif text-gray-900"
-              >
-                <p className="text-xl hidden md:block">
-                  {dodoitsu.author.name}
-                </p>
-                <Image
-                  src={dodoitsu.author.photo}
-                  width={45}
-                  height={45}
-                  alt="user photo"
-                  className="rounded-full"
-                />
-              </Link>
-            )}
+          <div className="border-t border-gray-300 pt-3 flex items-end flex-col-reverse md:items-center md:justify-between md:flex-row">
+            <p className="text-lg text-stone-600">{createdAt}</p>
+            <div className="flex items-center">
+              {dodoitsu.author && (
+                <Link
+                  href={`/profile/${dodoitsu.author.id}`}
+                  className="hover:bg-gray-50 text-2xl flex items-end p-4 font-noto-serif text-gray-900"
+                >
+                  <p className="text-xl hidden md:block">
+                    {dodoitsu.author.name}
+                  </p>
+                  <Image
+                    src={dodoitsu.author.photo}
+                    width={45}
+                    height={45}
+                    alt="user photo"
+                    className="rounded-full"
+                  />
+                </Link>
+              )}
 
-            <TwitterShareButton
-              href={twitterShareLink}
-              className="w-5 h-5 lg:w-8 lg:h-8 z-10"
-            />
+              <TwitterShareButton
+                href={twitterShareLink}
+                className="w-5 h-5 lg:w-8 lg:h-8 z-10"
+              />
 
-            <div className="flex items-end">
-              <button
-                className={`ml-3 text-white font-bold py-2 px-2 rounded-full ${
-                  isLiked
-                    ? "bg-red-300 hover:bg-red-400"
-                    : "bg-gray-300 hover:bg-gray-400"
-                }
+              <div className="flex items-end">
+                <button
+                  className={`ml-3 text-white font-bold py-2 px-2 rounded-full ${
+                    isLiked
+                      ? "bg-red-300 hover:bg-red-400"
+                      : "bg-gray-300 hover:bg-gray-400"
+                  }
               ${
                 user
                   ? "cursor-pointer"
                   : "cursor-not-allowed bg-gray-300 hover:bg-gray-300"
               }`}
-                onClick={() => onClickHeart()}
-              >
-                <SolidHeartIcon className="w-5 h-5 lg:w-8 lg:h-8" />
-              </button>
-              <p className="text-xl ml-1 text-stone-600">{likeCount}</p>
+                  onClick={() => onClickHeart()}
+                >
+                  <SolidHeartIcon className="w-5 h-5 lg:w-8 lg:h-8" />
+                </button>
+                <p className="text-xl ml-1 text-stone-600">{likeCount}</p>
+              </div>
             </div>
           </div>
         )}

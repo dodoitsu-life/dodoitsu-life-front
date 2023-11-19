@@ -1,6 +1,5 @@
 "use client";
 
-import { cache } from "react";
 import { useQuery } from "react-query";
 
 import { Dodoitsu } from "@/src/types/Dodoitsu";

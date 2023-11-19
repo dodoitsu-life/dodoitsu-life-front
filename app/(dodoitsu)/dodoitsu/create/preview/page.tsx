@@ -22,7 +22,7 @@ const DodoitsuCreatePreview = () => {
     description,
     isLiked: false,
     likeCount: 0,
-    createdAt: new Date(),
+    createdAt: "",
   };
 
   const { mutate: postDodoitsu, isLoading: isPostDodoitsuLoading } =
