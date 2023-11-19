@@ -63,8 +63,8 @@ const DodoitsuCreatePreview = () => {
 
   return (
     <main className="container mx-auto px-4 flex justify-center">
-      <div className="w-full max-w-7xl mt-12">
-        <section id="page-title" className="mb-12">
+      <div className="w-full max-w-7xl">
+        <section id="page-title" className="mb-8">
           <Card>
             <div className="m-8">
               <h1 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
