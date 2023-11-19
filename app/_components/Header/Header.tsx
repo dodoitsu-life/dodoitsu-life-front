@@ -12,6 +12,7 @@ import {
   XMarkIcon,
   ClipboardIcon,
   TrophyIcon,
+  PencilIcon,
 } from "@heroicons/react/24/outline";
 import { useContext } from "react";
 import { DropdownMenu, DropdownMenuItem } from "@/app/_components/DropdownMenu";
@@ -34,6 +35,11 @@ export const Header = () => {
       name: "ランキング",
       icon: TrophyIcon,
       link: "/dodoitsu/ranking?page=1",
+    },
+    {
+      name: "投稿する",
+      icon: PencilIcon,
+      link: "/dodoitsu/create",
     },
   ];
 
