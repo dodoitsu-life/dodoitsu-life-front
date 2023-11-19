@@ -61,13 +61,14 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const intervalId = setInterval(refreshToken, 1000 * 60 * 30);
-    const getMeTimeoutId = setTimeout(getMe, 500);
-    const tokenRefreshTimeoutId = setTimeout(refreshToken, 1000);
+    const initTimeoutId = setTimeout(async () => {
+      await refreshToken();
+      getMe();
+    }, 10);
 
     return () => {
       clearInterval(intervalId);
-      clearTimeout(getMeTimeoutId);
-      clearTimeout(tokenRefreshTimeoutId);
+      clearTimeout(initTimeoutId);
     };
   }, []);
 
