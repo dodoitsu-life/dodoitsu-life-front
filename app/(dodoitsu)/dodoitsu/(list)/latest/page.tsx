@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { useQuery } from "react-query";
+import { useSearchParams } from "next/navigation";
 import { Dodoitsu } from "@/src/types/Dodoitsu";
 
 import { DodoitsuList } from "../../_components/DodoitsuList";
@@ -16,23 +17,20 @@ type DodoitsuListResponse = {
   allCount: number;
 };
 
-const getDodoitsuList = async (): Promise<DodoitsuListResponse> => {
-  const res = await fetch(
-    `/api/dodoitsu/latest?page=1&limit=${ITEMS_PER_PAGE}`
-  );
+export default function DodoitsuLatest() {
+  const searchParams = useSearchParams();
+  const pageStr = decodeURIComponent(searchParams.get("page") || "1");
+  const page = Number(pageStr);
 
-  return await res.json();
-};
-
-export default function DodoitsuLatest({
-  searchParams,
-}: {
-  searchParams: { page: number };
-}) {
-  const page = Number(searchParams.page);
   const { data, isLoading, isError } = useQuery(
-    "latestDodoitsuList",
-    getDodoitsuList,
+    ["latestDodoitsuList", page],
+    async (): Promise<DodoitsuListResponse> => {
+      const res = await fetch(
+        `/api/dodoitsu/latest?page=${page}&limit=${ITEMS_PER_PAGE}`
+      );
+
+      return await res.json();
+    },
     {
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
