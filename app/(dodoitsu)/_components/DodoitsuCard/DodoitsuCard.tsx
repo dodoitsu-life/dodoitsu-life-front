@@ -1,6 +1,6 @@
 "use client";
 
-import { format, parseISO } from "date-fns";
+import { format, parseISO, isValid } from "date-fns";
 import { useState, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -125,8 +125,14 @@ export const DodoitsuCard = ({
     related: ["fal_engineer"],
   });
 
-  const createdAtDate = parseISO(dodoitsu.createdAt);
-  const createdAt = format(createdAtDate, "yyyy/MM/dd HH:mm");
+  // dodoitsu.createdAt が有効な日付文字列であるか確認
+  const isValidDate =
+    dodoitsu.createdAt && isValid(parseISO(dodoitsu.createdAt));
+
+  // 有効な日付であれば変換し、そうでなければ "" を使用
+  const createdAt = isValidDate
+    ? format(parseISO(dodoitsu.createdAt), "yyyy/MM/dd HH:mm")
+    : "";
 
   return (
     <Card clickable={clickable}>
