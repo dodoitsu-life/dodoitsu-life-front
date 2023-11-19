@@ -31,8 +31,14 @@ export default function DodoitsuLatest({
 }) {
   const page = Number(searchParams.page);
   const { data, isLoading, isError } = useQuery(
-    "latestDodoitsuList",
-    getDodoitsuList,
+    ["latestDodoitsuList", page],
+    async (): Promise<DodoitsuListResponse> => {
+      const res = await fetch(
+        `/api/dodoitsu/latest?page=${page}&limit=${ITEMS_PER_PAGE}`
+      );
+
+      return await res.json();
+    },
     {
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
