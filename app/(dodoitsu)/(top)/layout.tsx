@@ -5,7 +5,7 @@ export const metadata = (): Metadata => {
   // TODO: pathの動的な取得が現状できないので、一旦固定値を入れておく
   const url = "https://dodoitsu-life.vercel.app";
   return seoGen({
-    title: "都々逸ライフ",
+    title: "都々逸の投稿・共有サイト | 都々逸ライフ",
     description: "都々逸を投稿・閲覧できるサービスです",
     url: `${url}/`,
     imageUrl: `${url}/api/ogp?content=都々逸ライフ\n都々逸の投稿・閲覧サイト`,
