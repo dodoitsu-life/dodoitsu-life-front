@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "都々逸ライフ｜プレビュー",
+  title: "プレビュー｜都々逸ライフ",
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
