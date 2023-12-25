@@ -138,15 +138,15 @@ export const DodoitsuCard = ({
     <Card clickable={clickable}>
       <div className="m-8">
         {displayContent && (
-          <div className="text-xl lg:text-3xl font-bold font-noto-serif text-gray-900 dark:text-gray-900 mb-6">
+          <h1 className="text-xl lg:text-3xl font-bold font-noto-serif text-gray-900 dark:text-gray-900 mb-6">
             {dodoitsu.content}
-          </div>
+          </h1>
         )}
 
         {dodoitsu.description && displayDiscrition && (
-          <div className="text-md lg:text-lg border-t border-gray-300 py-5 font-bold font-noto-serif text-gray-900 dark:text-gray-900 whitespace-pre-wrap">
+          <h2 className="text-md lg:text-lg border-t border-gray-300 py-5 font-bold font-noto-serif text-gray-900 dark:text-gray-900 whitespace-pre-wrap">
             {dodoitsu.description}
-          </div>
+          </h2>
         )}
 
         {displayFooter && (
