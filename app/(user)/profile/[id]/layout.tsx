@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Params }) {
     const url = "https://dodoitsu-life.vercel.app";
 
     return seoGen({
-      title: `都々逸ライフ｜${user.name}さんのプロフィール`,
+      title: `${user.name}さんのプロフィール｜都々逸ライフ`,
       url: `${url}/profile/${user.id}`,
       imageUrl: `${url}/api/ogp?content=${user.name}さんのプロフィール`,
     });
