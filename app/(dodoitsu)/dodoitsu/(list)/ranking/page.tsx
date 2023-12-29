@@ -47,12 +47,12 @@ export default function DodoitsuLatest() {
   const Paginate = () => {
     if (data && data.allCount > ITEMS_PER_PAGE) {
       const maxPage = Math.ceil(data.allCount / ITEMS_PER_PAGE);
-      const pageLinkGen = (page: number) => `/dodoitsu/latest?page=${page}`;
+      const pageLinkGen = (page: number) => `/dodoitsu/ranking?page=${page}`;
 
       if (page < 1 || page > maxPage || isNaN(page)) {
-        if (page < 1) redirect("/dodoitsu/latest?page=1");
-        if (page > maxPage) redirect(`/dodoitsu/latest?page=${maxPage}`);
-        if (isNaN(page)) redirect("/dodoitsu/latest?page=1");
+        if (page < 1) redirect("/dodoitsu/ranking?page=1");
+        if (page > maxPage) redirect(`/dodoitsu/ranking?page=${maxPage}`);
+        if (isNaN(page)) redirect("/dodoitsu/ranking?page=1");
       }
       return (
         <PaginationLink
