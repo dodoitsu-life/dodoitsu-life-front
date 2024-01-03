@@ -1,6 +1,9 @@
 import $axios from "@/src/lib/axios";
 
-type CreateDodoitsuRequest = {
+type CreateDodoitsuRequestQuery = {
+  themeId: string;
+};
+type CreateDodoitsuRequestBody = {
   content: string;
   description: string;
 };
@@ -8,11 +11,15 @@ type CreateDodoitsuRequest = {
 type CreateDodoitsuResponse = { id: string };
 
 export const createDodoitsu = async ({
+  query,
   body,
 }: {
-  body: CreateDodoitsuRequest;
+  query: CreateDodoitsuRequestQuery;
+  body: CreateDodoitsuRequestBody;
 }): Promise<CreateDodoitsuResponse> => {
-  return await $axios.post("/dodoitsu", body).then((response) => {
-    return { id: response.data.data.id };
-  });
+  return await $axios
+    .post("/dodoitsu", body, { params: query })
+    .then((response) => {
+      return { id: response.data.data.id };
+    });
 };
