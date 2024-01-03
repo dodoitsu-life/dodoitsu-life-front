@@ -11,6 +11,8 @@ import { AuthContext } from "@/app/_components/Providers/AuthProvider";
 import { TwitterShareButton } from "@components/TwitterShareButton";
 import twitterShareLinkGen from "@/src/utils/twitterShareLinkGen";
 import { Card } from "@components/Card";
+import { ThemeBadge } from "@/app/(dodoitsu)/_components/ThemeBadge";
+
 import { Props } from "./types";
 
 export const DodoitsuCard = ({
@@ -138,9 +140,14 @@ export const DodoitsuCard = ({
     <Card clickable={clickable}>
       <div className="m-8">
         {displayContent && (
-          <h1 className="text-xl lg:text-3xl font-bold font-noto-serif text-gray-900 dark:text-gray-900 mb-6">
-            {dodoitsu.content}
-          </h1>
+          <>
+            {dodoitsu.theme && (
+              <ThemeBadge className="mb-2" theme={dodoitsu.theme} clickable />
+            )}
+            <h1 className="text-xl lg:text-3xl font-bold font-noto-serif text-gray-900 dark:text-gray-900 mb-6">
+              {dodoitsu.content}
+            </h1>
+          </>
         )}
 
         {dodoitsu.description && displayDiscrition && (
