@@ -24,9 +24,9 @@ export default async function ThemeInfo({ params }: { params: Params }) {
 
           {theme.description && (
             <div className="mb-6 md:flex md:direction-row items-center justify-center">
-              <p className="text-md lg:text-xl text-gray-500 sm:text-lg dark:text-gray-900">
+              <span className="text-md lg:text-xl text-gray-500 sm:text-lg dark:text-gray-900">
                 {theme.description}
-              </p>
+              </span>
             </div>
           )}
 
