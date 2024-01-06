@@ -19,7 +19,6 @@ export default function twitterShareLinkGen(
   const _url = new URL("https://twitter.com/intent/tweet");
 
   if (params.text) _url.searchParams.set("text", params.text);
-  if (params.url) _url.searchParams.set("url", params.url);
   if (params.hashtags)
     _url.searchParams.set("hashtags", params.hashtags.join(","));
   if (params.via) _url.searchParams.set("via", params.via);
@@ -27,6 +26,7 @@ export default function twitterShareLinkGen(
     _url.searchParams.set("related", params.related.join(","));
   if (params.in_reply_to)
     _url.searchParams.set("in_reply_to", params.in_reply_to);
+  if (params.url) _url.searchParams.set("url", params.url);
 
   return _url.toString();
 }

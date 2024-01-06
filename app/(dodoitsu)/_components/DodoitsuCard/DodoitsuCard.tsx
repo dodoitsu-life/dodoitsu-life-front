@@ -118,13 +118,21 @@ export const DodoitsuCard = ({
     return <Loading />;
   }
 
+  let shereText = "";
+  if (dodoitsu.theme)
+    shereText = `お題「${dodoitsu.theme.title}」に参加中の都々逸です！\n`;
+  shereText += `${dodoitsu.content}\n`;
+
+  const shereHashtags = ["都々逸ライフ", "都々逸"];
+  if (dodoitsu.theme) shereHashtags.push(dodoitsu.theme.title);
+
   const twitterShareLink = twitterShareLinkGen({
-    text: `${dodoitsu.content}\n`,
-    hashtags: ["都々逸ライフ", "都々逸"],
+    text: shereText,
+    hashtags: shereHashtags,
+    // via: dodoitsu.author?.twitterId,
+    // related: ["fal_engineer"],
     // TODO: pathの動的な取得が現状できないので、一旦固定値を入れておく
     url: `https://dodoitsu-life.vercel.app/dodoitsu/detail/${dodoitsu.id}`,
-    // via: dodoitsu.author?.twitterId,
-    related: ["fal_engineer"],
   });
 
   // dodoitsu.createdAt が有効な日付文字列であるか確認
