@@ -1,4 +1,3 @@
-import { Black_And_White_Picture } from "next/font/google";
 import { NextRequest, ImageResponse } from "next/server";
 
 export const runtime = "edge";
