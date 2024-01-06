@@ -1,3 +1,4 @@
+import { Black_And_White_Picture } from "next/font/google";
 import { NextRequest, ImageResponse } from "next/server";
 
 export const runtime = "edge";
@@ -5,7 +6,7 @@ export const runtime = "edge";
 export async function GET(req: NextRequest) {
   const searchParams = new URL(req.url).searchParams;
   const content = searchParams.get("content");
-  const colorCode = searchParams.get("color_code") || "D1BCF7";
+  const colorCode = searchParams.get("color_code") || "eda8cf";
   const authorName = searchParams.get("author_name") || "";
 
   const authorText = authorName ? `@${authorName}` : "";
@@ -56,7 +57,7 @@ export async function GET(req: NextRequest) {
           style={{
             marginTop: "30px",
             marginBottom: "20px",
-            right: "15",
+            right: "50",
             fontSize: 30,
             color: "#333",
             alignSelf: "flex-end",
