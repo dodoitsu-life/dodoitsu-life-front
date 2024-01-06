@@ -1,10 +1,10 @@
 import { parseISO, format } from "date-fns";
-import Link from "next/link";
 import Image from "next/image";
 import { HeartIcon as SolidHeartIcon } from "@heroicons/react/24/solid";
 
 import { DodoitsuListCardProps } from "./types";
 import { Card } from "@components/Card";
+import { ThemeBadge } from "@/app/(dodoitsu)/_components/ThemeBadge";
 
 export const DodoitsuListCard = ({
   dodoitsu,
@@ -15,7 +15,6 @@ export const DodoitsuListCard = ({
       <Card>
         <div className="m-9">
           <div className="bg-gray-200 my-6 h-8 w-auto animate-pulse" />
-
           <div className="flex items-center justify-end border-t border-gray-300 pt-5 animate-pulse">
             <div className="w-9 h-9 lg:w-12 lg:h-12 rounded-full bg-gray-200"></div>
           </div>
@@ -35,6 +34,9 @@ export const DodoitsuListCard = ({
   return (
     <Card clickable>
       <div className="m-8">
+        {dodoitsu.theme && (
+          <ThemeBadge className="mb-2" theme={dodoitsu.theme} />
+        )}
         <div className="text-xl lg:text-3xl font-bold font-noto-serif text-gray-900 dark:text-gray-900 mb-6">
           {dodoitsu.content}
         </div>

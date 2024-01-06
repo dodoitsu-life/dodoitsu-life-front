@@ -1,13 +1,13 @@
 import { Props } from "./types";
-import { DodoitsuListCard } from "./DodoitsuListCard";
+import { ThemeListCard } from "./ThemeListCard";
 import Link from "next/link";
 
-export const DodoitsuList = ({ dodoitsuList, isLoading }: Props) => {
-  if (isLoading || !dodoitsuList) {
+export const ThemeList = ({ themeList, isLoading }: Props) => {
+  if (isLoading || !themeList) {
     const LoadingCard = () => {
       return (
         <div className="mt-10">
-          <DodoitsuListCard isLoading={true} />
+          <ThemeListCard isLoading={true} />
         </div>
       );
     };
@@ -23,10 +23,10 @@ export const DodoitsuList = ({ dodoitsuList, isLoading }: Props) => {
 
   return (
     <div>
-      {dodoitsuList.map((dodoitsu, index) => (
+      {themeList.map((theme, index) => (
         <div key={index} className="my-8">
-          <Link href={`/dodoitsu/detail/${dodoitsu.id}`}>
-            <DodoitsuListCard dodoitsu={dodoitsu} />
+          <Link href={`/theme/detail/${theme.id}?page=1`}>
+            <ThemeListCard theme={theme} />
           </Link>
         </div>
       ))}

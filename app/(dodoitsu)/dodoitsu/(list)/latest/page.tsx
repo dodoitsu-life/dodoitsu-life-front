@@ -4,9 +4,9 @@ import { redirect } from "next/navigation";
 import { useQuery } from "react-query";
 import { useSearchParams } from "next/navigation";
 import { Dodoitsu } from "@/src/types/Dodoitsu";
+import { PaginationLink } from "@/app/_components/PaginationLink";
 
 import { DodoitsuList } from "../../_components/DodoitsuList";
-import { PaginationLink } from "../_components/PaginationLink";
 
 // 一ページ当たりに表示する都々逸の件数
 const ITEMS_PER_PAGE = 10;
@@ -67,7 +67,7 @@ export default function DodoitsuLatest() {
   return (
     <div className="h-full flex flex-col justify-between">
       <section id="dodoitsu-list">
-        <h1 className="mb-8 text-center lg:text-3xl text-lg font-bold text-gray-900 dark:text-white">
+        <h1 className="mb-8 text-center lg:text-3xl text-2xl font-bold text-gray-900 dark:text-white">
           最新の都々逸
         </h1>
 

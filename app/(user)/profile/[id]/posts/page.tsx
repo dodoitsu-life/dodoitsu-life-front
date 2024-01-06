@@ -3,7 +3,7 @@ import { Card } from "@components/Card";
 import { getUserPostedDodoitsuList } from "@/src/server/dodoitsu/getDodoitsuList";
 
 import { DodoitsuList } from "@/app/(dodoitsu)/dodoitsu/_components/DodoitsuList";
-import { PaginationLink } from "@/app/(dodoitsu)/dodoitsu/(list)/_components/PaginationLink";
+import { PaginationLink } from "@/app/_components/PaginationLink";
 
 // 一ページ当たりに表示する都々逸の件数
 const ITEMS_PER_PAGE = 10;

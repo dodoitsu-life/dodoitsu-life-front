@@ -5,8 +5,11 @@ import { createDodoitsu } from "@/src/server/dodoitsu/createDodoitsu";
 export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
+  const url = new URL(req.url);
+  const themeId = url.searchParams.get("themeId") || "";
+  const query = { themeId };
   const body = await req.json();
-  return await createDodoitsu({ body })
+  return await createDodoitsu({ query, body })
     .then((res) => {
       return NextResponse.json(res, { status: 200 });
     })

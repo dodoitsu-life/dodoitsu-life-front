@@ -18,8 +18,12 @@ export const getLatestDodoitsuList = cache(
       },
     };
 
-    const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
-      await $axios.get("/dodoitsu/latest", config).then((response) => {
+    const {
+      data: dodoitsuList,
+      count,
+    }: { data: Dodoitsu[]; count: number } = await $axios
+      .get("/dodoitsu/latest", config)
+      .then((response) => {
         return response.data;
       });
 
@@ -36,8 +40,12 @@ export const getPopularDodoitsuList = cache(
       },
     };
 
-    const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
-      await $axios.get("/dodoitsu/popular", config).then((response) => {
+    const {
+      data: dodoitsuList,
+      count,
+    }: { data: Dodoitsu[]; count: number } = await $axios
+      .get("/dodoitsu/popular", config)
+      .then((response) => {
         return response.data;
       });
 
@@ -57,8 +65,12 @@ export const getUserPostedDodoitsuList = cache(
       },
     };
 
-    const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
-      await $axios.get(`/dodoitsu/user/${userId}`, config).then((response) => {
+    const {
+      data: dodoitsuList,
+      count,
+    }: { data: Dodoitsu[]; count: number } = await $axios
+      .get(`/dodoitsu/user/${userId}`, config)
+      .then((response) => {
         return response.data;
       });
 
@@ -78,12 +90,39 @@ export const getUserLikedDodoitsuList = cache(
       },
     };
 
-    const { data: dodoitsuList, count }: { data: Dodoitsu[]; count: number } =
-      await $axios
-        .get(`/dodoitsu/user/${userId}/liked`, config)
-        .then((response) => {
-          return response.data;
-        });
+    const {
+      data: dodoitsuList,
+      count,
+    }: { data: Dodoitsu[]; count: number } = await $axios
+      .get(`/dodoitsu/user/${userId}/liked`, config)
+      .then((response) => {
+        return response.data;
+      });
+
+    return { dodoitsuList, count };
+  }
+);
+
+export const getThemePostedDodoitsuList = cache(
+  async (
+    themeId: string,
+    query: GetDodoitsuListRequest
+  ): Promise<GetDodoitsuListResponse> => {
+    const config = {
+      params: query,
+      headers: {
+        "Cache-Control": "no-store",
+      },
+    };
+
+    const {
+      data: dodoitsuList,
+      count,
+    }: { data: Dodoitsu[]; count: number } = await $axios
+      .get(`/dodoitsu/theme/${themeId}`, config)
+      .then((response) => {
+        return response.data;
+      });
 
     return { dodoitsuList, count };
   }
