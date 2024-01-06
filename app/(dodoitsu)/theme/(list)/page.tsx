@@ -67,7 +67,7 @@ export default function Theme() {
   return (
     <div className="h-full flex flex-col justify-between">
       <section id="dodoitsu-list">
-        <h1 className="mb-8 text-center lg:text-3xl text-2xl　text-gray-900 dark:text-white">
+        <h1 className="mb-8 text-center lg:text-3xl text-2xl text-gray-900 dark:text-white">
           お題別
         </h1>
         <ListView />
