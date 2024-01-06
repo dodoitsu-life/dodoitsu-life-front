@@ -25,7 +25,7 @@ export default function Layout({
     <div>
       <div className="w-full max-w-7xl mt-12">{children}</div>
       <section id="yesterday-bests" className="mt-24">
-        <h2 className="mb-8 text-center lg:text-3xl text-lg font-bold text-gray-900 dark:text-gray-900">
+        <h2 className="mb-8 text-center lg:text-3xl text-lg text-gray-900 dark:text-gray-900">
           人気の都々逸
         </h2>
         <div className="mt-7 text-center">
@@ -34,7 +34,7 @@ export default function Layout({
       </section>
 
       <section id="yaesterday-posts" className="my-24">
-        <h2 className="mb-8 text-center lg:text-3xl text-lg font-bold text-gray-900 dark:text-gray-900">
+        <h2 className="mb-8 text-center lg:text-3xl text-lg text-gray-900 dark:text-gray-900">
           最新の都々逸
         </h2>
 

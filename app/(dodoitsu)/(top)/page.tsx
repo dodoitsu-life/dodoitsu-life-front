@@ -6,10 +6,10 @@ export default function TopPage() {
     <section id="site-discription">
       <Card>
         <div className="m-8">
-          <h1 className="mb-5 text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-900">
+          <h1 className="mb-5 text-2xl lg:text-3xl text-gray-900 dark:text-gray-900 flex justify-center">
             都々逸ライフ
           </h1>
-          <p className="mb-10 text-md lg:text-xl text-gray-500 sm:text-lg dark:text-gray-900">
+          <p className="mb-10 text-md lg:text-xl text-gray-500 sm:text-lg dark:text-gray-900 flex justify-center">
             「都々逸ライフ」は、あなたの思いを形にできる都々逸投稿サイトです。
             <br />
             誰でも簡単に都々逸を書いて共有できます。

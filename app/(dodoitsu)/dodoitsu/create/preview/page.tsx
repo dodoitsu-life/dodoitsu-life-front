@@ -93,7 +93,7 @@ const DodoitsuCreatePreview = () => {
         <section id="page-title" className="mb-8">
           <Card>
             <div className="m-8">
-              <h1 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
+              <h1 className="text-lg lg:text-2xl text-gray-900 dark:text-white">
                 プレビュー
               </h1>
               {themeId && (
@@ -104,7 +104,7 @@ const DodoitsuCreatePreview = () => {
                 />
               )}
               <div
-                className="bg-orange-50 border-l-4 border-orange-300 text-orange-700 p-4 mt-5"
+                className="bg-pink-100 border-l-4 border-pink-300 text-gray-700 p-4 mt-5"
                 role="alert"
               >
                 <p className="font-bold">まだ投稿は完了していません</p>
