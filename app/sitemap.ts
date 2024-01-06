@@ -43,7 +43,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
   const themeDetailPagePaths = themeList.map((theme) => {
     return {
-      url: `${projectUrl}/theme/detail/${theme.id}`,
+      url: `${projectUrl}/theme/detail/${theme.id}?page=1`,
       lastModified,
     };
   });
