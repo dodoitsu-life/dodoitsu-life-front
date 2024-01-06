@@ -31,7 +31,7 @@ export default async function ThemeInfo({ params }: { params: Params }) {
           )}
 
           {theme.status === Status.ACTIVE && (
-            <div className="w-full flex justify-end">
+            <div className="w-full flex justify-center">
               <LinkButton
                 text="このお題に投稿する"
                 href={`/dodoitsu/create?themeId=${theme.id}`}

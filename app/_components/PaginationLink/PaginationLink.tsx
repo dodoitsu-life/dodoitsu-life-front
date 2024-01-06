@@ -19,7 +19,7 @@ export const PaginationLink = ({ page, maxPage, pageLinkGen }: Props) => {
           </Link>
         )}
 
-        <p className="btn btn-active">{page}</p>
+        <p className="btn bg-pink-300 hover:bg-pink-200">{page}</p>
         {page < maxPage - 1 && (
           <Link className="btn" href={pageLinkGen(page + 1)}>
             {page + 1}

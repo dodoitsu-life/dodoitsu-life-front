@@ -40,7 +40,7 @@ export const CreateForm = (props: Props) => {
       <div className="md:flex mb-5">
         <div className="md:w-1/5">
           <label
-            className="block text-gray-500 font-bold md:text-right mt-2 mb-1 md:mb-0 pr-4"
+            className="block text-gray-500 md:text-right mt-2 mb-1 md:mb-0 pr-4"
             htmlFor="content"
           >
             都々逸
@@ -75,7 +75,7 @@ export const CreateForm = (props: Props) => {
       <div className="md:flex">
         <div className="md:w-1/5">
           <label
-            className="block text-gray-500 font-bold md:text-right mt-1 mb-1 md:mb-0 pr-4"
+            className="block text-gray-500 md:text-right mt-1 mb-1 md:mb-0 pr-4"
             htmlFor="content"
           >
             作者コメント
