@@ -23,8 +23,8 @@ export default async function ThemeInfo({ params }: { params: Params }) {
           </h1>
 
           {theme.description && (
-            <div className="mb-6 flex items-left">
-              <span className="text-md lg:text-xl text-gray-500 sm:text-lg dark:text-gray-900">
+            <div className="mb-6 flex">
+              <span className="text-md lg:text-xl text-gray-500 sm:text-lg dark:text-gray-900 text-start whitespace-pre-wrap">
                 {theme.description}
               </span>
             </div>
