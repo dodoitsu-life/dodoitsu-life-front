@@ -37,7 +37,9 @@ export const ThemeListCard = ({
           {theme.title}
         </div>
         <div className="flex items-start border-t border-gray-300 pt-2 flex-col">
-          <p className="mb-2 text-lg text-stone-600">{theme.description}</p>
+          <span className="mb-2 text-lg text-stone-600 whitespace-pre-wrap">
+            {theme.description}
+          </span>
           <p className="text-stone-600">
             {startDate} ~ {endDate}
           </p>

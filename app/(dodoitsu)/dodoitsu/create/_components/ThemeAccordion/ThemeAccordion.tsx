@@ -28,7 +28,7 @@ export const ThemeAccordion = ({ theme, isLoading, isError }: Props) => {
         <span className="text-lg">{theme.title}</span>
         {theme.description && (
           <div className="mx-3 mt-1">
-            <span>{theme.description}</span>
+            <span className="whitespace-pre-wrap">{theme.description}</span>
           </div>
         )}
       </Accordion>
