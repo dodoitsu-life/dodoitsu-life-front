@@ -1,10 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
 import { Dialog } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import {
   BookOpenIcon,
   ArrowRightOnRectangleIcon,
@@ -22,7 +21,6 @@ import { AuthContext } from "@/app/_components/Providers/AuthProvider";
 import { Menu } from "./types";
 
 export const Header = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { user, logOut } = useContext(AuthContext);
@@ -51,13 +49,10 @@ export const Header = () => {
     },
   ];
 
-  const loginMenu = {
+  const loginMenu: Menu = {
     name: "ログイン",
     icon: ArrowRightOnRectangleIcon,
-    action: () => {
-      Cookies.set("callback_path", pathname);
-      router.push("/auth/login");
-    },
+    link: "/auth/login",
   };
 
   const myPageUrl = `/profile/${user?.id}`;
@@ -129,12 +124,12 @@ export const Header = () => {
                 </div>
               </DropdownMenu>
             ) : (
-              <button onClick={loginMenu.action}>
+              <Link href={loginMenu.link}>
                 <div className="hover:bg-primary h-full text-xl flex items-center font-noto-serif p-1 pr-2 text-white">
                   {<loginMenu.icon className="w-9 h-6" />}
                   {loginMenu.name}
                 </div>
-              </button>
+              </Link>
             )}
           </div>
         </div>
@@ -205,12 +200,12 @@ export const Header = () => {
                         </button>
                       </div>
                     ) : (
-                      <button onClick={loginMenu.action}>
+                      <Link href={loginMenu.link}>
                         <div className="hover:bg-gray-50 text-2xl flex items-center p-4 font-noto-serif text-gray-900 ring-gray-200">
                           {<loginMenu.icon className="w-6 h-6 mr-3" />}
                           {loginMenu.name}
                         </div>
-                      </button>
+                      </Link>
                     )}
                   </div>
                 </div>
