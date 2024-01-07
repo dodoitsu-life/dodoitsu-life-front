@@ -2,6 +2,7 @@
 import { useQuery } from "react-query";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
+import Cookies from "js-cookie";
 import { AuthContext } from "@/app/_components/Providers/AuthProvider";
 
 export default function Page() {
@@ -26,7 +27,8 @@ export default function Page() {
     {
       onSuccess: async (res) => {
         await logIn(res);
-        router.push("/");
+        const callbackPath = Cookies.get("callback_path") || "/";
+        router.push(callbackPath);
       },
       onError: (error: Error) => {
         alert(error.message);
