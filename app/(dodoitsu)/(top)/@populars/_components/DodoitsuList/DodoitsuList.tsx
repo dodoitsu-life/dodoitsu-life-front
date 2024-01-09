@@ -33,7 +33,7 @@ export const DodoitsuList = ({ dodoitsuList, loading = false }: Props) => {
   if (!dodoitsuList || dodoitsuList.length === 0) {
     return (
       <div className="text-center">
-        <div className="text-2xl font-bold font-noto-serif text-gray-900 dark:text-white">
+        <div className="text-2xl font-bold font-noto-serif text-gray-900">
           まだ投稿がありません
         </div>
       </div>
@@ -61,7 +61,7 @@ export const DodoitsuList = ({ dodoitsuList, loading = false }: Props) => {
                 <div className="m-5 flex">
                   {Icon}
                   <div
-                    className={`${textSize} font-bold font-noto-serif text-gray-900 dark:text-gray-900`}
+                    className={`${textSize} font-bold font-noto-serif text-gray-900`}
                   >
                     {dodoitsu.content}
                   </div>

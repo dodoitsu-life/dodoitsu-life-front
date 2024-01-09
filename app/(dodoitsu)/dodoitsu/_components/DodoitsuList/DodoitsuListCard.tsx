@@ -37,7 +37,7 @@ export const DodoitsuListCard = ({
         {dodoitsu.theme && (
           <ThemeBadge className="mb-2" theme={dodoitsu.theme} />
         )}
-        <div className="text-xl lg:text-3xl font-bold font-noto-serif text-gray-900 dark:text-gray-900 mb-6">
+        <div className="text-xl lg:text-3xl font-bold font-noto-serif text-gray-900 mb-6">
           {dodoitsu.content}
         </div>
 

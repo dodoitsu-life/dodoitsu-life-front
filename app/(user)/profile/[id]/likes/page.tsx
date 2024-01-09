@@ -34,7 +34,7 @@ export default async function UserProfileLikeDodoitsuList({
     <Card>
       <div className="h-full flex flex-col justify-between md:p-12 p-6">
         <section id="dodoitsu-list">
-          <h2 className="mb-8 text-center lg:text-3xl text-lg text-gray-900 dark:text-white">
+          <h2 className="mb-8 text-center lg:text-3xl text-lg text-gray-900">
             いいねした都々逸
           </h2>
 

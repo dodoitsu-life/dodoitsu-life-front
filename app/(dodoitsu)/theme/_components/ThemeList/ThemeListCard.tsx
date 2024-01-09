@@ -33,7 +33,7 @@ export const ThemeListCard = ({
     <Card clickable>
       <div className="mx-8 mt-6 mb-8">
         <StatusBadge className="mb-2" status={theme.status} />
-        <div className="text-xl lg:text-3xl font-bold font-noto-serif text-gray-900 dark:text-gray-900 mb-6">
+        <div className="text-xl lg:text-3xl font-bold font-noto-serif text-gray-900 mb-6">
           {theme.title}
         </div>
         <div className="flex items-start border-t border-gray-300 pt-2 flex-col">

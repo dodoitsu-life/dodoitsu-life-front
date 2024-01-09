@@ -93,9 +93,7 @@ const DodoitsuCreatePreview = () => {
         <section id="page-title" className="mb-8">
           <Card>
             <div className="m-8">
-              <h1 className="text-lg lg:text-2xl text-gray-900 dark:text-white">
-                プレビュー
-              </h1>
+              <h1 className="text-lg lg:text-2xl text-gray-900">プレビュー</h1>
               {themeId && (
                 <ThemeAccordion
                   theme={theme}
