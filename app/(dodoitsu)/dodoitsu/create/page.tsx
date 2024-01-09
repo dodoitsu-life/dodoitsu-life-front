@@ -55,7 +55,7 @@ export default function DodoitsuCreatePage() {
         <section id="page-title" className="mb-8">
           <Card>
             <div className="m-8">
-              <h1 className="text-lg lg:text-2xl text-gray-900 dark:text-white">
+              <h1 className="text-lg lg:text-2xl text-gray-900">
                 都々逸新規作成
               </h1>
               {themeId && (

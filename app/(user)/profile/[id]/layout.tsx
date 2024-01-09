@@ -48,7 +48,7 @@ export default async function Layout({
               href={`https://twitter.com/${user.twitterId}`}
               target="_blank"
             >
-              <h1 className="lg:text-3xl text-lg pt-2 font-bold text-gray-900 dark:text-gray-900">
+              <h1 className="lg:text-3xl text-lg pt-2 font-bold text-gray-900">
                 {user.name}
               </h1>
               <ArrowTopRightOnSquareIcon className="w-6 h-6 ml-1" />

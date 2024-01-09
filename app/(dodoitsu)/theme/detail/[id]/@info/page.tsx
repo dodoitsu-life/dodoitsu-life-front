@@ -18,13 +18,13 @@ export default async function ThemeInfo({ params }: { params: Params }) {
           <div className="w-full flex">
             <StatusBadge status={theme.status} />
           </div>
-          <h1 className="lg:text-3xl text-lg pt-2 pb-4 font-bold text-gray-900 dark:text-gray-900">
+          <h1 className="lg:text-3xl text-lg pt-2 pb-4 font-bold text-gray-900">
             お題：「{theme.title}」
           </h1>
 
           {theme.description && (
             <div className="mb-6 flex">
-              <span className="text-md lg:text-xl text-gray-500 sm:text-lg dark:text-gray-900 text-start whitespace-pre-wrap">
+              <span className="text-md lg:text-xl text-gray-500 sm:text-lg text-start whitespace-pre-wrap">
                 {theme.description}
               </span>
             </div>
